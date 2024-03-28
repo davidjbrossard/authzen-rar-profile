@@ -9,20 +9,20 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: OAuth
+area: "Security"
+workgroup: "Web Authorization Protocol"
 keyword:
  - authorization
  - abac
  - authzen
  - openid
 venue:
-  group: WG
-  type: Working Group
-  mail: WG@example.com
-  arch: https://example.com/WG
-  github: USER/REPO
-  latest: https://example.com/LATEST
+  group: "Web Authorization Protocol"
+  type: "Working Group"
+  mail: "oauth@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/oauth/"
+  github: "davidjbrossard/authzen-rar-profile"
+  latest: "https://davidjbrossard.github.io/authzen-rar-profile/draft-brossard-oauth-rar_authzen.html"
 
 author:
  -
