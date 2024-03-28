@@ -19,22 +19,23 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization Requests"
+abbrev: "AuthZEN RAR Profile"
 category: info
 
-docname: draft-todo-yourname-protocol-latest
-submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
+docname: draft-brossard-oauth-rar_authzen-latest
+submissiontype: IETF
 number:
 date:
 consensus: true
 v: 3
 area: AREA
-workgroup: WG Working Group
+workgroup: OAuth
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - authorization
+ - abac
+ - authzen
+ - openid
 venue:
   group: WG
   type: Working Group
@@ -45,9 +46,17 @@ venue:
 
 author:
  -
-    fullname: Your Name Here
-    organization: Your Organization Here
-    email: your.email@example.com
+    fullname: David Brossard
+    organization: Axiomatics
+    email: david.brossard@axiomatics.com
+ -
+    fullname: Omri Gazitt
+    organization: Aserto
+    email: omri@aserto.com
+ -
+    fullname: Alex Babeanu
+    organization: 3Edges
+    email: alex@3edges.com
 
 normative:
 
@@ -56,8 +65,7 @@ informative:
 
 --- abstract
 
-TODO Abstract
-
+This specification defines a profile of OAuth 2.0 Rich Authorization Requests leveraging the OpenID AuthZEN authorization request/response formats within the authorization_details JSON object. Authorization servers and resource servers from different vendors can leverage this profile to request and receive relevant authorization decisions from an AuthZEN-compatible PDP in an interoperable manner.
 
 --- middle
 
