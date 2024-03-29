@@ -51,8 +51,7 @@ This specification defines a profile of OAuth 2.0 Rich Authorization Requests le
 
 # Introduction
 
-TODO Introduction
-
+AuthZEN will focus on specific areas of interoperability by documenting common authorization patterns, define standard mechanisms, protocols and formats for communication between authorization components, and recommend best practices for developing secure applications. OVERVIEW.
 
 # Conventions and Definitions
 
