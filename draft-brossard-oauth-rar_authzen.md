@@ -57,11 +57,12 @@ AuthZEN will focus on specific areas of interoperability by documenting common a
 
 {::boilerplate bcp14-tagged}
 
+This specification uses the terms "access token", "refresh token", "authorization server" (AS), "resource server" (RS), "authorization endpoint", "authorization request", "authorization response", "token endpoint", "grant type", "access token request", "access token response", and "client" defined by "The OAuth 2.0 Authorization Framework" [RFC6749].
+
 
 # Security Considerations
 
-TODO Security
-
+The Security Considerations of [RFC9396], [RFC6749], [RFC7662], and [RFC8414] all apply.
 
 # IANA Considerations
 
