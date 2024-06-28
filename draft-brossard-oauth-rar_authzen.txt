@@ -5,10 +5,10 @@
 Web Authorization Protocol                                   D. Brossard
 Internet-Draft                                                Axiomatics
 Intended status: Informational                                 O. Gazitt
-Expires: 30 September 2024                                        Aserto
+Expires: 30 December 2024                                         Aserto
                                                               A. Babeanu
                                                                   3Edges
-                                                           29 March 2024
+                                                            28 June 2024
 
 
    AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 September 2024.
+   This Internet-Draft will expire on 30 December 2024.
 
 Copyright Notice
 
@@ -99,9 +99,17 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
+   This specification uses the terms "access token", "refresh token",
+   "authorization server" (AS), "resource server" (RS), "authorization
+   endpoint", "authorization request", "authorization response", "token
+   endpoint", "grant type", "access token request", "access token
+   response", and "client" defined by "The OAuth 2.0 Authorization
+   Framework" [RFC6749].
+
 3.  Security Considerations
 
-   TODO Security
+   The Security Considerations of [RFC9396], [RFC6749], [RFC7662], and
+   [RFC8414] all apply.
 
 4.  IANA Considerations
 
