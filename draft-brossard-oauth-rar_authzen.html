@@ -1160,13 +1160,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-normative-references-2" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-normative-references-2" class="internal xref">Normative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1184,7 +1187,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-1-2">The aim of this profile is to define an AuthZEN-conformant profile of the OAuth 2.0 Rich Authorization Requests [RFC9396]. [RFC9396] introduces a new parameter authorization_details that allows clients to specify their fine-grained authorization requirements using the expressiveness of JSON [RFC8259] data structures.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">This specification introduces a more structured format for the authorization_details parameter. The new format is also JSON [RFC8259] as a result of which this specification is conformant with [RFC9396] and is merely a stricter profile.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">For example the authorization request for a credit transfer mentioned in [RFC9396] would now be structured as follows<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">{
+<p id="section-1-5"><code>
+{
     "subject": {
         "type": "user",
         "id": "Alice"
@@ -1210,7 +1214,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
     "context": {
         "remittanceInformationUnstructured": "Ref Number Merchant"
     }
-}<a href="#section-1-5" class="pilcrow">¶</a></p>
+}
+</code><a href="#section-1-5" class="pilcrow">¶</a></p>
 <p id="section-1-6">Using AuthZEN as a format for authorization_details will increase the usability and the interoperability of [RFC9396]. In particular, it will be possible for the AS to forward the contents of the authorization_details parameter to an AuthZEN-conformant PDP.<a href="#section-1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1246,21 +1251,21 @@ This specification uses the terms "PDP" and "PEP" defined by "eXtensible Access 
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <p id="section-4.1-1"><span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>
-Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997, <a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>.
-[RFC7519]
-Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015, <a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>.
-[RFC7662]
-Richer, J., Ed., "OAuth 2.0 Token Introspection", RFC 7662, DOI 10.17487/RFC7662, October 2015, <a href="https://www.rfc-editor.org/info/rfc7662">https://www.rfc-editor.org/info/rfc7662</a>.
-<span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span>
-Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017, <a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>.
-[RFC8414]
-Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0 Authorization Server Metadata", RFC 8414, DOI 10.17487/RFC8414, June 2018, <a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>.
-[RFC8628]
-Denniss, W., Bradley, J., Jones, M., and H. Tschofenig, "OAuth 2.0 Device Authorization Grant", RFC 8628, DOI 10.17487/RFC8628, August 2019, <a href="https://www.rfc-editor.org/info/rfc8628">https://www.rfc-editor.org/info/rfc8628</a>.
-[RFC8707]
-Campbell, B., Bradley, J., and H. Tschofenig, "Resource Indicators for OAuth 2.0", RFC 8707, DOI 10.17487/RFC8707, February 2020, <a href="https://www.rfc-editor.org/info/rfc8707">https://www.rfc-editor.org/info/rfc8707</a>.
-[RFC9396]
-Campbell, B., Richer, J., and T. Lodderstedt, "OAuth 2.0 Rich Authorization Requests", RFC 9396, DOI 10.17487/RFC9396, May 2023, <a href="https://www.rfc-editor.org/info/rfc9396">https://www.rfc-editor.org/info/rfc9396</a>.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997, <a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">[RFC7519]
+Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015, <a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-3">[RFC7662]
+Richer, J., Ed., "OAuth 2.0 Token Introspection", RFC 7662, DOI 10.17487/RFC7662, October 2015, <a href="https://www.rfc-editor.org/info/rfc7662">https://www.rfc-editor.org/info/rfc7662</a>.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.1-4"><span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span>
+Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017, <a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.1-5">[RFC8414]
+Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0 Authorization Server Metadata", RFC 8414, DOI 10.17487/RFC8414, June 2018, <a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.1-6">[RFC8628]
+Denniss, W., Bradley, J., Jones, M., and H. Tschofenig, "OAuth 2.0 Device Authorization Grant", RFC 8628, DOI 10.17487/RFC8628, August 2019, <a href="https://www.rfc-editor.org/info/rfc8628">https://www.rfc-editor.org/info/rfc8628</a>.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.1-7">[RFC8707]
+Campbell, B., Bradley, J., and H. Tschofenig, "Resource Indicators for OAuth 2.0", RFC 8707, DOI 10.17487/RFC8707, February 2020, <a href="https://www.rfc-editor.org/info/rfc8707">https://www.rfc-editor.org/info/rfc8707</a>.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
+<p id="section-4.1-8">[RFC9396]
+Campbell, B., Richer, J., and T. Lodderstedt, "OAuth 2.0 Rich Authorization Requests", RFC 9396, DOI 10.17487/RFC9396, May 2023, <a href="https://www.rfc-editor.org/info/rfc9396">https://www.rfc-editor.org/info/rfc9396</a>.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="informative-references">
@@ -1271,17 +1276,23 @@ Campbell, B., Richer, J., and T. Lodderstedt, "OAuth 2.0 Rich Authorization Requ
 <p id="section-4.2-1">[XACML]
 Rissanen, E., "eXtensible Access Control Markup Language (XACML) Version 3.0", OASIS Standard, January 2013, <a href="https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html">https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html</a><a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">[ABAC]
-Hu, V., Ferraiolo, D., Kuhn, R., Schnitzer, A., Sandlin, K., Scarfone, K., "Guide to Attribute Based Access Control (ABAC) Definition and Considerations", NIST Special Publication 800-162, DOI 10.6028/NIST.SP.800-162, January 2014, <a href="https://doi.org/10.6028/NIST.SP.800-162">https://doi.org/10.6028/NIST.SP.800-162</a>
-# IANA Considerations<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">This document has no IANA actions.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+Hu, V., Ferraiolo, D., Kuhn, R., Schnitzer, A., Sandlin, K., Scarfone, K., "Guide to Attribute Based Access Control (ABAC) Definition and Considerations", NIST Special Publication 800-162, DOI 10.6028/NIST.SP.800-162, January 2014, <a href="https://doi.org/10.6028/NIST.SP.800-162">https://doi.org/10.6028/NIST.SP.800-162</a><a href="#section-4.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-5">
+      <h2 id="name-iana-considerations">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-5-1">This document has no IANA actions.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-normative-references">
-<section id="section-5">
+<section id="section-6">
       <h2 id="name-normative-references-2">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-normative-references-2" class="section-name selfRef">Normative References</a>
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-normative-references-2" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
