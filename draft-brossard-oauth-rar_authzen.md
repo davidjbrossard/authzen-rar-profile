@@ -56,13 +56,48 @@ OpenID AuthZEN is a Working Group under the OpenID Foundation which aims to incr
 - define standard design patterns for authorization
 - produce educational material to help raise awareness of externalized authorization.
 
-The aim of this profile is to define an AuthZEN-conformant profile of the OAuth 2.0 Rich Authorization Requests RFC9396.
+The aim of this profile is to define an AuthZEN-conformant profile of the OAuth 2.0 Rich Authorization Requests [RFC9396]. [RFC9396] introduces a new parameter authorization_details that allows clients to specify their fine-grained authorization requirements using the expressiveness of JSON [RFC8259] data structures.
+
+This specification introduces a more structured format for the authorization_details parameter. The new format is also JSON [RFC8259] as a result of which this specification is conformant with [RFC9396] and is merely a stricter profile.
+
+For example the authorization request for a credit transfer mentioned in [RFC9396] would now be structured as follows
+
+{
+    "subject": {
+        "type": "user",
+        "id": "Alice"
+    },
+    "resource": {
+        "type": "payment_initiation",
+        "id": "123",
+        "recipient": {
+            "creditorName": "Merchant A",
+            "creditorAccount": {
+                "bic": "ABCIDEFFXXX",
+                "iban": "DE02100100109307118603"
+            }
+        }
+    },
+    "action": {
+        "name": "transfer",
+        "instructedAmount": {
+            "currency": "EUR",
+            "amount": "123.50"
+        }
+    },
+    "context": {
+        "remittanceInformationUnstructured": "Ref Number Merchant"
+    }
+}
+
+Using AuthZEN as a format for authorization_details will increase the usability and the interoperability of [RFC9396]. In particular, it will be possible for the AS to forward the contents of the authorization_details parameter to an AuthZEN-conformant PDP.
 
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
 
 This specification uses the terms "access token", "refresh token", "authorization server" (AS), "resource server" (RS), "authorization endpoint", "authorization request", "authorization response", "token endpoint", "grant type", "access token request", "access token response", and "client" defined by "The OAuth 2.0 Authorization Framework" [RFC6749].
+This specification uses the terms "PDP" and "PEP" defined by "eXtensible Access Control Markup Language (XACML) Version 3.0" [XACML].
 
 
 # Security Considerations
