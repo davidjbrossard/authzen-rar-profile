@@ -136,10 +136,6 @@ This specification uses the terms "PDP" and "PEP" defined by "eXtensible Access 
 
 The Security Considerations of [RFC9396], [RFC6749], [RFC7662], and [RFC8414] all apply.
 
-# References
-
-## Normative References
-
 # IANA Considerations
 
 This document has no IANA actions.
@@ -150,4 +146,9 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+   We would like to thank members of the OpenID AuthZEN Working Group for their
+   valuable feedback during the preparation of this specification. In particular
+   our thanks go to Gerry Gebel and Allan Foster.
+
+   We would also like to thank Justin Richer and Pieter Kasselman for their
+   guidance on this spec and the overall IETF process.
