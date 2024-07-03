@@ -39,14 +39,14 @@ author:
     email: alex@3edges.com
 
 normative:
-    RFC2119
-    RFC7519
-    RFC7662
-    RFC8174
-    RFC8414
-    RFC8628
-    RFC8707
-    RFC9396
+    RFC2119:
+    RFC7519:
+    RFC7662:
+    RFC8174:
+    RFC8414:
+    RFC8628:
+    RFC8707:
+    RFC9396:
 
 informative:
     XACML:
@@ -131,6 +131,7 @@ Using AuthZEN as a format for authorization_details will increase the usability 
 This specification uses the terms "access token", "refresh token", "authorization server" (AS), "resource server" (RS), "authorization endpoint", "authorization request", "authorization response", "token endpoint", "grant type", "access token request", "access token response", and "client" defined by "The OAuth 2.0 Authorization Framework" [RFC6749].
 This specification uses the terms "PDP" and "PEP" defined by "eXtensible Access Control Markup Language (XACML) Version 3.0" [XACML].
 
+# Request Parameter "authorization_details"
 
 # Security Considerations
 
@@ -152,3 +153,4 @@ This document has no IANA actions.
 
    We would also like to thank Justin Richer and Pieter Kasselman for their
    guidance on this spec and the overall IETF process.
+
