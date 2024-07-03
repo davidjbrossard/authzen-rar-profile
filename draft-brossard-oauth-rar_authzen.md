@@ -47,6 +47,40 @@ normative:
     RFC8628:
     RFC8707:
     RFC9396:
+    AUTHZEN:
+        target: https://openid.github.io/authzen/
+        title: OpenID AuthZEN Authorization API
+        date: July 2024
+        author:
+        -
+            name: Omri Gazitt
+            ins: O. Gazitt
+            org: Aserto
+        -
+            name: David Brossard
+            ins: D. Brossard
+            org: Axiomatics
+        -
+            name: Atul Tulshibagwale
+            ins: A. Tulshibagwale
+            org: SGNL
+    BOXCAR:
+        target: https://openid.github.io/authzen/authorization-api-1_1#name-access-evaluations-api
+        title: OpenID AuthZEN Authorization API
+        date: July 2024
+        author:
+        -
+            name: Omri Gazitt
+            ins: O. Gazitt
+            org: Aserto
+        -
+            name: David Brossard
+            ins: D. Brossard
+            org: Axiomatics
+        -
+            name: Atul Tulshibagwale
+            ins: A. Tulshibagwale
+            org: SGNL
 
 informative:
     XACML:
@@ -120,18 +154,114 @@ For example the authorization request for a credit transfer mentioned in [RFC939
     }
 }
 ~~~~
-{: title='Source Authorization Request' sourcecode-markers="true"}
+{: title='Source Authorization Request' sourcecode-markers="false"}
 
-Using AuthZEN as a format for authorization_details will increase the usability and the interoperability of [RFC9396]. In particular, it will be possible for the AS to forward the contents of the authorization_details parameter to an AuthZEN-conformant PDP.
+Using AuthZEN as a format for authorization_details will increase the usability and the interoperability of [RFC9396]. In particular, it will be possible for the AS to forward the contents of the authorization_details parameter to an AuthZEN-conformant Policy Decision Point (PDP).
 
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
 
 This specification uses the terms "access token", "refresh token", "authorization server" (AS), "resource server" (RS), "authorization endpoint", "authorization request", "authorization response", "token endpoint", "grant type", "access token request", "access token response", and "client" defined by "The OAuth 2.0 Authorization Framework" [RFC6749].
-This specification uses the terms "PDP" and "PEP" defined by "eXtensible Access Control Markup Language (XACML) Version 3.0" [XACML].
+This specification uses the terms "PDP" and "PEP" defined by [ABAC] and [XACML].
 
 # Request Parameter "authorization_details"
+
+In [RFC9396], the request parameter authorization_details contains, in JSON
+notation, an array of objects.  Each JSON object contains the data to
+specify the authorization requirements for a certain type of
+resource. This specification defines the format for each one of these objects
+such that it conforms to [AUTHZEN].
+
+[AUTHZEN] groups JSON datastructures into 4 JSON objects:
+- subject: A Subject is the user or robotic principal about whom the Authorization API is being invoked. The Subject may be requesting access at the time the Authorization API is invoked.
+- resource: A Resource is the target of an access request. It is a JSON ([RFC8259]) object that is constructed similar to a Subject entity.
+- action: An Action is the type of access that the requester intends to perform. Action is a JSON ([RFC8259]) object that contains at least a name field.
+- context: The Context object is a set of attributes that represent environmental or contextual data about the request such as time of day. It is a JSON ([RFC8259]) object.
+
+Note: the aforementioned is indicative only. Always refer to [AUTHZEN] for the formal definition of each element.
+
+# Support for Multiple Authorization Requests
+
+[AUTHZEN] supports a profile that allows the expression of multiple authorization requests in a single JSON object. As a result, this profile recommends the use of a single `authorization_details` object containing _boxcarred_ requests as described in [BOXCAR] when possible and the use of the `authorization_details` array ottherwise.
+
+## Example (non-normative)
+
+This example is based on the one in [RFC9396] under section 3.  Authorization Request.
+
+~~~~language-json
+[{
+  "subject": {
+    "id": "alice@acmecorp.com",
+    "type": "user"
+  },
+  "resource":{
+    "id": "123",
+    "type": "account_information",
+    "location": "https://example.com/accounts"
+  },
+  "evaluations": {
+    "eval-1": {
+      "action": {
+        "name": "list_accounts"
+      }
+    },
+    "eval-2": {
+      "action": {
+        "name": "read_balances"
+      }
+    },
+    "eval-3": {
+      "action": {
+        "name": "read_transactions"
+      }
+    }
+  }
+},
+{
+  "subject": {
+    "id": "alice@acmecorp.com",
+    "type": "user"
+  },
+  "resource":{
+    "id": "123",
+    "type": "payment_initiation",
+    "location": "https://example.com/payments",
+    "recipient": {
+        "creditorName": "Merchant A",
+        "creditorAccount": {
+            "bic": "ABCIDEFFXXX",
+            "iban": "NL02RABO2228161411"
+        }
+    }
+  },
+  "context":{
+    "remittanceInformationUnstructured": "Ref Number Merchant"
+  },
+  "evaluations": {
+    "eval-1": {
+      "action": {
+        "name": "initiate",
+        "instructedAmount": {
+        "currency": "EUR",
+        "amount": "123.50"
+        }
+      }
+    },
+    "eval-2": {
+      "action": {
+        "name": "status"
+      }
+    },
+    "eval-3": {
+      "action": {
+        "name": "cancel"
+      }
+    }
+  }
+}
+]
+~~~~
 
 # Security Considerations
 
