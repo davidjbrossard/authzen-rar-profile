@@ -41,13 +41,11 @@ author:
 normative:
     RFC2119:
     RFC6749:
-    RFC7519:
     RFC7662:
     RFC8174:
     RFC8259:
     RFC8414:
     RFC8628:
-    RFC8707:
     RFC9396:
     AUTHZEN:
         target: https://openid.github.io/authzen/
@@ -269,9 +267,9 @@ Parameter encoding follows the exact same rules as [RFC9396].
 
 # Support for Multiple Authorization Requests
 
-[AUTHZEN] supports a profile that allows the expression of multiple authorization requests in a single JSON object. As a result, this profile recommends the use of a single `authorization_details` object containing _boxcarred_ requests as described in [BOXCAR] when possible and the use of the `authorization_details` array otherwise.
-
-
+[AUTHZEN] supports a profile that allows the expression of multiple authorization requests in a single JSON object. As a result, this
+profile recommends the use of a single `authorization_details` object containing _boxcarred_ requests as described in [BOXCAR] when
+possible and the use of the `authorization_details` array otherwise.
 
 ## Example (non-normative)
 
