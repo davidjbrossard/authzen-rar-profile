@@ -404,10 +404,6 @@ Table of Contents
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
               <https://www.rfc-editor.org/rfc/rfc6749>.
 
-   [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
-              (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
-              <https://www.rfc-editor.org/rfc/rfc7519>.
-
    [RFC7662]  Richer, J., Ed., "OAuth 2.0 Token Introspection",
               RFC 7662, DOI 10.17487/RFC7662, October 2015,
               <https://www.rfc-editor.org/rfc/rfc7662>.
@@ -430,10 +426,6 @@ Table of Contents
               "OAuth 2.0 Device Authorization Grant", RFC 8628,
               DOI 10.17487/RFC8628, August 2019,
               <https://www.rfc-editor.org/rfc/rfc8628>.
-
-   [RFC8707]  Campbell, B., Bradley, J., and H. Tschofenig, "Resource
-              Indicators for OAuth 2.0", RFC 8707, DOI 10.17487/RFC8707,
-              February 2020, <https://www.rfc-editor.org/rfc/rfc8707>.
 
    [RFC9396]  Lodderstedt, T., Richer, J., and B. Campbell, "OAuth 2.0
               Rich Authorization Requests", RFC 9396,
