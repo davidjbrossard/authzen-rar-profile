@@ -140,7 +140,7 @@ Table of Contents
            }
        },
        "context": {
-           "remittanceInformationUnstructured": "Ref Number Merchant"
+           "remittance": "Ref Number Merchant"
        }
    }
 
@@ -266,7 +266,7 @@ Table of Contents
                }
            },
            "context": {
-               "remittanceInformationUnstructured": "Ref Number Merchant"
+               "remittance": "Ref Number Merchant"
            }
        }
    }
@@ -340,7 +340,7 @@ Table of Contents
            }
          },
          "context":{
-           "remittanceInformationUnstructured": "Ref Number Merchant"
+           "remittance": "Ref Number Merchant"
          },
          "evaluations": {
            "eval-1": {
