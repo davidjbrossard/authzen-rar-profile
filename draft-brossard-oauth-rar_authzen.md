@@ -171,7 +171,7 @@ In [RFC9396], the request parameter authorization_details contains, in JSON
 notation, an array of objects.  Each JSON object contains the data to
 specify the authorization requirements for a certain type of
 resource. This specification defines the format for each one of these objects
-such that it conforms to [AUTHZEN].
+such that it conforms to [AUTHZEN] and [RFC9396].
 
 [AUTHZEN] groups JSON datastructures into 4 JSON objects:
 - subject: A Subject is the user or robotic principal about whom the Authorization API is being invoked. The Subject may be requesting access at the time the Authorization API is invoked.
@@ -181,85 +181,165 @@ such that it conforms to [AUTHZEN].
 
 Note: the aforementioned is indicative only. Always refer to [AUTHZEN] for the formal definition of each element.
 
+## "authorization_details" Structure
+
+Because **type** is **REQUIRED**, the new _authorization\_details_ structure is as follows:
+
+- type:
+An identifier for the authorization details type as a string. The value for this profile is "authzen". The value is case-insensitive. This field is **REQUIRED**.
+
+- request:
+this field contains the entire AuthZEN-conformant authorization request. This field is **REQUIRED**.
+
+## Authorization Details Types
+
+This profile declares a new value for the _type_ field as stated in the previous section. The value for this profile is "authzen". This indicates there will be a field called request and its value will be an AuthZEN-conformant authorization request.
+
+AuthZEN also defines a _type_ field in the Subject and Resource categories. This field is meant to describe the type of user and/or resource required.
+
+## Common Data Fields
+
+No field other than type and authzen shall be allowed in authorization_details when the type is "authzen". All other fields such as the ones mentioned in [RFC9396] shall be inserted inside the AuthZEN request in the relevant object (Subject, Resource, Action, or Context).
+
+# Authorization Request
+
+Conformant to [RFC9396], the authorization_details authorization request parameter can be used to specify authorization requirements in all places where the scope parameter is used for the same purpose, examples include:
+
+- authorization requests as specified in [RFC6749]
+- device authorization requests as specified in [RFC8628]
+- backchannel authentication requests as defined in [OID-CIBA]
+
+Parameter encoding follows the exact same rules as [RFC9396].
+
+
+## Example (non-normative)
+
+~~~~language-json
+{
+  "type": "authzen",
+  "request":
+    {
+        "subject": {
+            "type": "user",
+            "id": "Alice"
+        },
+        "resource": {
+            "type": "payment_initiation",
+            "id": "123",
+            "recipient": {
+                "creditorName": "Merchant A",
+                "creditorAccount": {
+                    "bic": "ABCIDEFFXXX",
+                    "iban": "DE02100100109307118603"
+                }
+            }
+        },
+        "action": {
+            "name": "transfer",
+            "instructedAmount": {
+                "currency": "EUR",
+                "amount": "123.50"
+            }
+        },
+        "context": {
+            "remittanceInformationUnstructured": "Ref Number Merchant"
+        }
+    }
+}
+~~~~
+{: title='Source Authorization Request' sourcecode-markers="false"}
+
+
 # Support for Multiple Authorization Requests
 
-[AUTHZEN] supports a profile that allows the expression of multiple authorization requests in a single JSON object. As a result, this profile recommends the use of a single `authorization_details` object containing _boxcarred_ requests as described in [BOXCAR] when possible and the use of the `authorization_details` array ottherwise.
+[AUTHZEN] supports a profile that allows the expression of multiple authorization requests in a single JSON object. As a result, this profile recommends the use of a single `authorization_details` object containing _boxcarred_ requests as described in [BOXCAR] when possible and the use of the `authorization_details` array otherwise.
+
+
 
 ## Example (non-normative)
 
 This example is based on the one in [RFC9396] under section 3.  Authorization Request.
 
 ~~~~language-json
-[{
-  "subject": {
-    "id": "alice@acmecorp.com",
-    "type": "user"
-  },
-  "resource":{
-    "id": "123",
-    "type": "account_information",
-    "location": "https://example.com/accounts"
-  },
-  "evaluations": {
-    "eval-1": {
-      "action": {
-        "name": "list_accounts"
+[
+  {
+    "type": "authzen",
+    "request": 
+    {
+      "subject": {
+        "id": "alice@acmecorp.com",
+        "type": "user"
+      },
+      "resource":{
+        "id": "123",
+        "type": "account_information",
+        "location": "https://example.com/accounts"
+      },
+      "evaluations": {
+        "eval-1": {
+          "action": {
+            "name": "list_accounts"
+          }
+        },
+        "eval-2": {
+          "action": {
+            "name": "read_balances"
+          }
+        },
+        "eval-3": {
+          "action": {
+            "name": "read_transactions"
+          }
+        }
       }
-    },
-    "eval-2": {
-      "action": {
-        "name": "read_balances"
-      }
-    },
-    "eval-3": {
-      "action": {
-        "name": "read_transactions"
+    }
+  },
+  {
+    "type": "authzen",
+    "request":
+    {
+      "subject": {
+        "id": "alice@acmecorp.com",
+        "type": "user"
+      },
+      "resource":{
+        "id": "123",
+        "type": "payment_initiation",
+        "location": "https://example.com/payments",
+        "recipient": {
+            "creditorName": "Merchant A",
+            "creditorAccount": {
+                "bic": "ABCIDEFFXXX",
+                "iban": "NL02RABO2228161411"
+            }
+        }
+      },
+      "context":{
+        "remittanceInformationUnstructured": "Ref Number Merchant"
+      },
+      "evaluations": {
+        "eval-1": {
+          "action": {
+            "name": "initiate",
+            "instructedAmount": {
+            "currency": "EUR",
+            "amount": "123.50"
+            }
+          }
+        },
+        "eval-2": {
+          "action": {
+            "name": "status"
+          }
+        },
+        "eval-3": {
+          "action": {
+            "name": "cancel"
+          }
+        }
       }
     }
   }
-},
-{
-  "subject": {
-    "id": "alice@acmecorp.com",
-    "type": "user"
-  },
-  "resource":{
-    "id": "123",
-    "type": "payment_initiation",
-    "location": "https://example.com/payments",
-    "recipient": {
-        "creditorName": "Merchant A",
-        "creditorAccount": {
-            "bic": "ABCIDEFFXXX",
-            "iban": "NL02RABO2228161411"
-        }
-    }
-  },
-  "context":{
-    "remittanceInformationUnstructured": "Ref Number Merchant"
-  },
-  "evaluations": {
-    "eval-1": {
-      "action": {
-        "name": "initiate",
-        "instructedAmount": {
-        "currency": "EUR",
-        "amount": "123.50"
-        }
-      }
-    },
-    "eval-2": {
-      "action": {
-        "name": "status"
-      }
-    },
-    "eval-3": {
-      "action": {
-        "name": "cancel"
-      }
-    }
-  }
-}
 ]
 ~~~~
 
