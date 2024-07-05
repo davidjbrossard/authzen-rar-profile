@@ -3,7 +3,7 @@ title: "AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization Reques
 abbrev: "AuthZEN RAR Profile"
 category: info
 
-docname: draft-brossard-oauth-rar_authzen-latest
+docname: draft-brossard-oauth-rar_authzen
 submissiontype: IETF
 number:
 date:
