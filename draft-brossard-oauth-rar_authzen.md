@@ -165,7 +165,7 @@ For example the authorization request for a credit transfer mentioned in [RFC939
         }
     },
     "context": {
-        "remittanceInformationUnstructured": "Ref Number Merchant"
+        "remittance": "Ref Number Merchant"
     }
 }
 ~~~~
@@ -257,7 +257,7 @@ Parameter encoding follows the exact same rules as [RFC9396].
             }
         },
         "context": {
-            "remittanceInformationUnstructured": "Ref Number Merchant"
+            "remittance": "Ref Number Merchant"
         }
     }
 }
@@ -330,7 +330,7 @@ This example is based on the one in [RFC9396] under section 3.  Authorization Re
         }
       },
       "context":{
-        "remittanceInformationUnstructured": "Ref Number Merchant"
+        "remittance": "Ref Number Merchant"
       },
       "evaluations": {
         "eval-1": {
