@@ -40,9 +40,11 @@ author:
 
 normative:
     RFC2119:
+    RFC6749:
     RFC7519:
     RFC7662:
     RFC8174:
+    RFC8259:
     RFC8414:
     RFC8628:
     RFC8707:
@@ -81,6 +83,21 @@ normative:
             name: Atul Tulshibagwale
             ins: A. Tulshibagwale
             org: SGNL
+    OID-CIBA:
+      target: https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html
+      title: OpenID Connect Client-Initiated Backchannel Authentication Flow - Core 1.0
+      date: 1 September 2021
+      author:
+        -
+          name: G. Fernandez
+        -
+          name: F. Walter
+        -
+          name: A. Nennker
+        -
+          name: D. Tonge
+        -
+          name: B. Campbell
 
 informative:
     XACML:
