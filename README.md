@@ -2,10 +2,10 @@
 
 This is the working area for the individual Internet-Draft, "AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization Requests".
 
-* [Editor's Copy](https://davidjbrossard.github.io/authzen-rar-profile/#go.draft-brossard-oauth-rar_authzen.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-brossard-oauth-rar_authzen)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-brossard-oauth-rar_authzen)
-* [Compare Editor's Copy to Individual Draft](https://davidjbrossard.github.io/authzen-rar-profile/#go.draft-brossard-oauth-rar_authzen.diff)
+* [Editor's Copy](https://davidjbrossard.github.io/authzen-rar-profile/#go.draft-brossard-oauth-rar-authzen.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-brossard-oauth-rar-authzen)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-brossard-oauth-rar-authzen)
+* [Compare Editor's Copy to Individual Draft](https://davidjbrossard.github.io/authzen-rar-profile/#go.draft-brossard-oauth-rar-authzen.diff)
 
 
 ## Contributing

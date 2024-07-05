@@ -3,10 +3,10 @@ title: "AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization Reques
 abbrev: "AuthZEN RAR Profile"
 category: info
 
-docname: draft-brossard-oauth-rar-authzen
+docname: draft-brossard-oauth-rar-authzen-latest
 submissiontype: IETF
-number:
-date:
+number: 1
+date: 2024-07-04
 consensus: true
 v: 3
 area: "Security"
@@ -22,7 +22,7 @@ venue:
   mail: "oauth@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/oauth/"
   github: "davidjbrossard/authzen-rar-profile"
-  latest: "https://davidjbrossard.github.io/authzen-rar-profile/draft-brossard-oauth-rar_authzen.html"
+  latest: "https://davidjbrossard.github.io/authzen-rar-profile/draft-brossard-oauth-rar-authzen.html"
 
 author:
  -
