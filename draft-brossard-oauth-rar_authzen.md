@@ -264,7 +264,7 @@ This example is based on the one in [RFC9396] under section 3.  Authorization Re
 [
   {
     "type": "authzen",
-    "request": 
+    "request":
     {
       "subject": {
         "id": "alice@acmecorp.com",
