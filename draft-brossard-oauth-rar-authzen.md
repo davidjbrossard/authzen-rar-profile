@@ -3,9 +3,9 @@ title: "AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization Reques
 abbrev: "AuthZEN RAR Profile"
 category: info
 
-docname: draft-brossard-oauth-rar-authzen-latest
+docname: draft-brossard-oauth-rar-authzen
 submissiontype: IETF
-number: 1
+number:
 date: 2024-07-04
 consensus: true
 v: 3
@@ -29,14 +29,17 @@ author:
     fullname: David Brossard
     organization: Axiomatics
     email: david.brossard@axiomatics.com
+    country: Canada
  -
     fullname: Omri Gazitt
     organization: Aserto
     email: omri@aserto.com
+    country: United States of America
  -
     fullname: Alexandre Babeanu
     organization: 3Edges
     email: alex@3edges.com
+    country: Canada
 
 normative:
     RFC2119:
