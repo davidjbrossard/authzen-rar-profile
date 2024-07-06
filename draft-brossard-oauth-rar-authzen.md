@@ -126,20 +126,21 @@ informative:
 
 --- abstract
 
-This specification defines a profile of OAuth 2.0 Rich Authorization Requests leveraging the OpenID AuthZEN authorization request/response formats within the authorization_details JSON object. Authorization servers and resource servers from different vendors can leverage this profile to request and receive relevant authorization decisions from an AuthZEN-compatible PDP in an interoperable manner.
+This specification defines a profile of OAuth 2.0 Rich Authorization Requests leveraging the OpenID AuthZEN authorization request/response formats within the `authorization_details` JSON object. Authorization servers and resource servers from different vendors can leverage this profile to request and receive relevant authorization decisions from an AuthZEN-compatible PDP in an interoperable manner.
 
 --- middle
 
 # Introduction
 
 OpenID AuthZEN is a Working Group under the OpenID Foundation which aims to increase interoperability and standardization in the authorization realm. In particular, AuthZEN aims to:
+
 - build standards-based authorization APIs
 - define standard design patterns for authorization
 - produce educational material to help raise awareness of externalized authorization.
 
-The aim of this profile is to define an AuthZEN-conformant profile of the OAuth 2.0 Rich Authorization Requests [RFC9396]. [RFC9396] introduces a new parameter authorization_details that allows clients to specify their fine-grained authorization requirements using the expressiveness of JSON [RFC8259] data structures.
+The aim of this profile is to define an AuthZEN-conformant profile of the OAuth 2.0 Rich Authorization Requests [RFC9396]. [RFC9396] introduces a new parameter `authorization_details` that allows clients to specify their fine-grained authorization requirements using the expressiveness of JSON [RFC8259] data structures.
 
-This specification introduces a more structured format for the authorization_details parameter. The new format is also JSON [RFC8259] as a result of which this specification is conformant with [RFC9396] and is merely a stricter profile.
+This specification introduces a more structured format for the `authorization_details` parameter. The new format is also JSON [RFC8259] as a result of which this specification is conformant with [RFC9396] and is merely a stricter profile.
 
 For example the authorization request for a credit transfer mentioned in [RFC9396] would now be structured as follows
 
@@ -174,7 +175,7 @@ For example the authorization request for a credit transfer mentioned in [RFC939
 ~~~~
 {: title='Source Authorization Request' sourcecode-markers="false"}
 
-Using AuthZEN as a format for authorization_details will increase the usability and the interoperability of [RFC9396]. In particular, it will be possible for the AS to forward the contents of the authorization_details parameter to an AuthZEN-conformant Policy Decision Point (PDP).
+Using AuthZEN as a format for `authorization_details` will increase the usability and the interoperability of [RFC9396]. In particular, it will be possible for the AS to forward the contents of the `authorization_details` parameter to an AuthZEN-conformant Policy Decision Point (PDP).
 
 # Conventions and Definitions
 
@@ -183,15 +184,16 @@ Using AuthZEN as a format for authorization_details will increase the usability 
 This specification uses the terms "access token", "refresh token", "authorization server" (AS), "resource server" (RS), "authorization endpoint", "authorization request", "authorization response", "token endpoint", "grant type", "access token request", "access token response", and "client" defined by "The OAuth 2.0 Authorization Framework" [RFC6749].
 This specification uses the terms "PDP" and "PEP" defined by [ABAC] and [XACML].
 
-# Request Parameter "authorization_details"
+# Request Parameter `authorization_details`
 
-In [RFC9396], the request parameter authorization_details contains, in JSON
+In [RFC9396], the request parameter `authorization_details` contains, in JSON
 notation, an array of objects.  Each JSON object contains the data to
 specify the authorization requirements for a certain type of
 resource. This specification defines the format for each one of these objects
 such that it conforms to [AUTHZEN] and [RFC9396].
 
 [AUTHZEN] groups JSON datastructures into 4 JSON objects:
+
 - subject: A Subject is the user or robotic principal about whom the Authorization API is being invoked. The Subject may be requesting access at the time the Authorization API is invoked.
 - resource: A Resource is the target of an access request. It is a JSON ([RFC8259]) object that is constructed similar to a Subject entity.
 - action: An Action is the type of access that the requester intends to perform. Action is a JSON ([RFC8259]) object that contains at least a name field.
@@ -199,7 +201,7 @@ such that it conforms to [AUTHZEN] and [RFC9396].
 
 Note: the aforementioned is indicative only. Always refer to [AUTHZEN] for the formal definition of each element.
 
-## "authorization_details" Structure
+## `authorization_details` Structure
 
 Because **type** is **REQUIRED**, the new _authorization\_details_ structure is as follows:
 
@@ -217,11 +219,11 @@ AuthZEN also defines a _type_ field in the Subject and Resource categories. This
 
 ## Common Data Fields
 
-No field other than type and authzen shall be allowed in authorization_details when the type is "authzen". All other fields such as the ones mentioned in [RFC9396] shall be inserted inside the AuthZEN request in the relevant object (Subject, Resource, Action, or Context).
+No field other than `type` and `request` shall be allowed in `authorization_details` when the type is `authzen`. All other fields such as the ones mentioned in [RFC9396] shall be inserted inside the AuthZEN request in the relevant object (Subject, Resource, Action, or Context).
 
 # Authorization Request
 
-Conformant to [RFC9396], the authorization_details authorization request parameter can be used to specify authorization requirements in all places where the scope parameter is used for the same purpose, examples include:
+Conformant to [RFC9396], the `authorization_details` authorization request parameter can be used to specify authorization requirements in all places where the scope parameter is used for the same purpose, examples include:
 
 - authorization requests as specified in [RFC6749]
 - device authorization requests as specified in [RFC8628]
