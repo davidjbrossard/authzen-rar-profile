@@ -206,20 +206,20 @@ Note: the aforementioned is indicative only. Always refer to [AUTHZEN] for the f
 Because **type** is **REQUIRED**, the new _authorization\_details_ structure is as follows:
 
 - type:
-An identifier for the authorization details type as a string. The value for this profile is "authzen". The value is case-insensitive. This field is **REQUIRED**.
+An identifier for the authorization details type as a string. The value for this profile is "authzen_evaluation" or "authzen_evaluations", corresponding to the AuthZEN API being invoked. The value is case-insensitive. This field is **REQUIRED**.
 
 - request:
 this field contains the entire AuthZEN-conformant authorization request. This field is **REQUIRED**.
 
 ## Authorization Details Types
 
-This profile declares a new value for the _type_ field as stated in the previous section. The value for this profile is "authzen". This indicates there will be a field called request and its value will be an AuthZEN-conformant authorization request.
+This profile declares a new value for the _type_ field as stated in the previous section. The value for this profile is "authzen_evaluation" or "authzen_evaluations". This indicates there will be another field called `request` and its value will be an AuthZEN-conformant authorization request.
 
 AuthZEN also defines a _type_ field in the Subject and Resource categories. This field is meant to describe the type of user and/or resource required.
 
 ## Common Data Fields
 
-No field other than `type` and `request` shall be allowed in `authorization_details` when the type is `authzen`. All other fields such as the ones mentioned in [RFC9396] shall be inserted inside the AuthZEN request in the relevant object (Subject, Resource, Action, or Context).
+No field other than `type` and `request` shall be allowed in `authorization_details` when the type is `authzen_evaluation` or `authzen_evaluations`. All other fields such as the ones mentioned in [RFC9396] shall be inserted inside the AuthZEN request in the relevant object (Subject, Resource, Action, or Context).
 
 # Authorization Request
 
@@ -236,7 +236,7 @@ Parameter encoding follows the exact same rules as [RFC9396].
 
 ~~~~language-json
 {
-  "type": "authzen",
+  "type": "authzen_evaluation",
   "request":
     {
         "subject": {
@@ -283,7 +283,7 @@ This example is based on the one in [RFC9396] under section 3.  Authorization Re
 ~~~~language-json
 [
   {
-    "type": "authzen",
+    "type": "authzen_evaluations",
     "request":
     {
       "subject": {
@@ -315,7 +315,7 @@ This example is based on the one in [RFC9396] under section 3.  Authorization Re
     }
   },
   {
-    "type": "authzen",
+    "type": "authzen_evaluations",
     "request":
     {
       "subject": {
