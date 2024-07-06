@@ -1,0 +1,465 @@
+
+
+
+
+Internet Engineering Task Force (IETF)                       D. Brossard
+Request for Comments: 1                                       Axiomatics
+Category: Informational                                        O. Gazitt
+ISSN: 2070-1721                                                   Aserto
+                                                              A. Babeanu
+                                                                  3Edges
+                                                             4 July 2024
+
+
+   AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization
+                                Requests
+
+Abstract
+
+   This specification defines a profile of OAuth 2.0 Rich Authorization
+   Requests leveraging the OpenID AuthZEN authorization request/response
+   formats within the authorization_details JSON object.  Authorization
+   servers and resource servers from different vendors can leverage this
+   profile to request and receive relevant authorization decisions from
+   an AuthZEN-compatible PDP in an interoperable manner.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Not all documents
+   approved by the IESG are candidates for any level of Internet
+   Standard; see Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc1.
+
+Copyright Notice
+
+   Copyright (c) 2024 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Revised BSD License text as described in Section 4.e of the
+   Trust Legal Provisions and are provided without warranty as described
+   in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Request Parameter authorization_details
+     3.1.  authorization_details Structure
+     3.2.  Authorization Details Types
+     3.3.  Common Data Fields
+   4.  Authorization Request
+     4.1.  Example (non-normative)
+   5.  Support for Multiple Authorization Requests
+     5.1.  Example (non-normative)
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   OpenID AuthZEN is a Working Group under the OpenID Foundation which
+   aims to increase interoperability and standardization in the
+   authorization realm.  In particular, AuthZEN aims to:
+
+   *  build standards-based authorization APIs
+
+   *  define standard design patterns for authorization
+
+   *  produce educational material to help raise awareness of
+      externalized authorization.
+
+   The aim of this profile is to define an AuthZEN-conformant profile of
+   the OAuth 2.0 Rich Authorization Requests [RFC9396].  [RFC9396]
+   introduces a new parameter authorization_details that allows clients
+   to specify their fine-grained authorization requirements using the
+   expressiveness of JSON [RFC8259] data structures.
+
+   This specification introduces a more structured format for the
+   authorization_details parameter.  The new format is also JSON
+   [RFC8259] as a result of which this specification is conformant with
+   [RFC9396] and is merely a stricter profile.
+
+   For example the authorization request for a credit transfer mentioned
+   in [RFC9396] would now be structured as follows
+
+   {
+       "subject": {
+           "type": "user",
+           "id": "Alice"
+       },
+       "resource": {
+           "type": "payment_initiation",
+           "id": "123",
+           "recipient": {
+               "creditorName": "Merchant A",
+               "creditorAccount": {
+                   "bic": "ABCIDEFFXXX",
+                   "iban": "DE02100100109307118603"
+               }
+           }
+       },
+       "action": {
+           "name": "transfer",
+           "instructedAmount": {
+               "currency": "EUR",
+               "amount": "123.50"
+           }
+       },
+       "context": {
+           "remittance": "Ref Number Merchant"
+       }
+   }
+
+                   Figure 1: Source Authorization Request
+
+   Using AuthZEN as a format for authorization_details will increase the
+   usability and the interoperability of [RFC9396].  In particular, it
+   will be possible for the AS to forward the contents of the
+   authorization_details parameter to an AuthZEN-conformant Policy
+   Decision Point (PDP).
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   This specification uses the terms "access token", "refresh token",
+   "authorization server" (AS), "resource server" (RS), "authorization
+   endpoint", "authorization request", "authorization response", "token
+   endpoint", "grant type", "access token request", "access token
+   response", and "client" defined by "The OAuth 2.0 Authorization
+   Framework" [RFC6749].  This specification uses the terms "PDP" and
+   "PEP" defined by [ABAC] and [XACML].
+
+3.  Request Parameter authorization_details
+
+   In [RFC9396], the request parameter authorization_details contains,
+   in JSON notation, an array of objects.  Each JSON object contains the
+   data to specify the authorization requirements for a certain type of
+   resource.  This specification defines the format for each one of
+   these objects such that it conforms to [AUTHZEN] and [RFC9396].
+
+   [AUTHZEN] groups JSON datastructures into 4 JSON objects:
+
+   *  subject: A Subject is the user or robotic principal about whom the
+      Authorization API is being invoked.  The Subject may be requesting
+      access at the time the Authorization API is invoked.
+
+   *  resource: A Resource is the target of an access request.  It is a
+      JSON ([RFC8259]) object that is constructed similar to a Subject
+      entity.
+
+   *  action: An Action is the type of access that the requester intends
+      to perform.  Action is a JSON ([RFC8259]) object that contains at
+      least a name field.
+
+   *  context: The Context object is a set of attributes that represent
+      environmental or contextual data about the request such as time of
+      day.  It is a JSON ([RFC8259]) object.
+
+   Note: the aforementioned is indicative only.  Always refer to
+   [AUTHZEN] for the formal definition of each element.
+
+3.1.  authorization_details Structure
+
+   Because *type* is *REQUIRED*, the new _authorization_details_
+   structure is as follows:
+
+   *  type: An identifier for the authorization details type as a
+      string.  The value for this profile is "authzen_evaluation" or
+      "authzen_evaluations", corresponding to the AuthZEN API being
+      invoked.  The value is case-insensitive.  This field is
+      *REQUIRED*.
+
+   *  request: this field contains the entire AuthZEN-conformant
+      authorization request.  This field is *REQUIRED*.
+
+3.2.  Authorization Details Types
+
+   This profile declares a new value for the _type_ field as stated in
+   the previous section.  The value for this profile is
+   "authzen_evaluation" or "authzen_evaluations".  This indicates there
+   will be another field called request and its value will be an
+   AuthZEN-conformant authorization request.
+
+   AuthZEN also defines a _type_ field in the Subject and Resource
+   categories.  This field is meant to describe the type of user and/or
+   resource required.
+
+3.3.  Common Data Fields
+
+   No field other than type and request shall be allowed in
+   authorization_details when the type is authzen_evaluation or
+   authzen_evaluations.  All other fields such as the ones mentioned in
+   [RFC9396] shall be inserted inside the AuthZEN request in the
+   relevant object (Subject, Resource, Action, or Context).
+
+4.  Authorization Request
+
+   Conformant to [RFC9396], the authorization_details authorization
+   request parameter can be used to specify authorization requirements
+   in all places where the scope parameter is used for the same purpose,
+   examples include:
+
+   *  authorization requests as specified in [RFC6749]
+
+   *  device authorization requests as specified in [RFC8628]
+
+   *  backchannel authentication requests as defined in [OID-CIBA]
+
+   Parameter encoding follows the exact same rules as [RFC9396].
+
+4.1.  Example (non-normative)
+
+   {
+     "type": "authzen_evaluation",
+     "request":
+       {
+           "subject": {
+               "type": "user",
+               "id": "Alice"
+           },
+           "resource": {
+               "type": "payment_initiation",
+               "id": "123",
+               "recipient": {
+                   "creditorName": "Merchant A",
+                   "creditorAccount": {
+                       "bic": "ABCIDEFFXXX",
+                       "iban": "DE02100100109307118603"
+                   }
+               }
+           },
+           "action": {
+               "name": "transfer",
+               "instructedAmount": {
+                   "currency": "EUR",
+                   "amount": "123.50"
+               }
+           },
+           "context": {
+               "remittance": "Ref Number Merchant"
+           }
+       }
+   }
+
+                   Figure 2: Source Authorization Request
+
+5.  Support for Multiple Authorization Requests
+
+   [AUTHZEN] supports a profile that allows the expression of multiple
+   authorization requests in a single JSON object.  As a result, this
+   profile recommends the use of a single authorization_details object
+   containing _boxcarred_ requests as described in [BOXCAR] when
+   possible and the use of the authorization_details array otherwise.
+
+5.1.  Example (non-normative)
+
+   This example is based on the one in [RFC9396] under section 3.
+   Authorization Request.
+
+   [
+     {
+       "type": "authzen_evaluations",
+       "request":
+       {
+         "subject": {
+           "id": "alice@acmecorp.com",
+           "type": "user"
+         },
+         "resource":{
+           "id": "123",
+           "type": "account_information",
+           "location": "https://example.com/accounts"
+         },
+         "evaluations": {
+           "eval-1": {
+             "action": {
+               "name": "list_accounts"
+             }
+           },
+           "eval-2": {
+             "action": {
+               "name": "read_balances"
+             }
+           },
+           "eval-3": {
+             "action": {
+               "name": "read_transactions"
+             }
+           }
+         }
+       }
+     },
+     {
+       "type": "authzen_evaluations",
+       "request":
+       {
+         "subject": {
+           "id": "alice@acmecorp.com",
+           "type": "user"
+         },
+         "resource":{
+           "id": "123",
+           "type": "payment_initiation",
+           "location": "https://example.com/payments",
+           "recipient": {
+               "creditorName": "Merchant A",
+               "creditorAccount": {
+                   "bic": "ABCIDEFFXXX",
+                   "iban": "NL02RABO2228161411"
+               }
+           }
+         },
+         "context":{
+           "remittance": "Ref Number Merchant"
+         },
+         "evaluations": {
+           "eval-1": {
+             "action": {
+               "name": "initiate",
+               "instructedAmount": {
+               "currency": "EUR",
+               "amount": "123.50"
+               }
+             }
+           },
+           "eval-2": {
+             "action": {
+               "name": "status"
+             }
+           },
+           "eval-3": {
+             "action": {
+               "name": "cancel"
+             }
+           }
+         }
+       }
+     }
+   ]
+
+6.  Security Considerations
+
+   The Security Considerations of [RFC9396], [RFC6749], [RFC7662], and
+   [RFC8414] all apply.
+
+7.  IANA Considerations
+
+   This document has no IANA actions.
+
+8.  References
+
+8.1.  Normative References
+
+   [AUTHZEN]  Gazitt, O., Brossard, D., and A. Tulshibagwale, "OpenID
+              AuthZEN Authorization API", July 2024,
+              <https://openid.github.io/authzen/>.
+
+   [BOXCAR]   Gazitt, O., Brossard, D., and A. Tulshibagwale, "OpenID
+              AuthZEN Authorization API", July 2024,
+              <https://openid.github.io/authzen/authorization-api-
+              1_1#name-access-evaluations-api>.
+
+   [OID-CIBA] Fernandez, G., Walter, F., Nennker, A., Tonge, D., and B.
+              Campbell, "OpenID Connect Client-Initiated Backchannel
+              Authentication Flow - Core 1.0", September 2021,
+              <https://openid.net/specs/openid-client-initiated-
+              backchannel-authentication-core-1_0.html>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
+              RFC 6749, DOI 10.17487/RFC6749, October 2012,
+              <https://www.rfc-editor.org/rfc/rfc6749>.
+
+   [RFC7662]  Richer, J., Ed., "OAuth 2.0 Token Introspection",
+              RFC 7662, DOI 10.17487/RFC7662, October 2015,
+              <https://www.rfc-editor.org/rfc/rfc7662>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", STD 90, RFC 8259,
+              DOI 10.17487/RFC8259, December 2017,
+              <https://www.rfc-editor.org/rfc/rfc8259>.
+
+   [RFC8414]  Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Authorization Server Metadata", RFC 8414,
+              DOI 10.17487/RFC8414, June 2018,
+              <https://www.rfc-editor.org/rfc/rfc8414>.
+
+   [RFC8628]  Denniss, W., Bradley, J., Jones, M., and H. Tschofenig,
+              "OAuth 2.0 Device Authorization Grant", RFC 8628,
+              DOI 10.17487/RFC8628, August 2019,
+              <https://www.rfc-editor.org/rfc/rfc8628>.
+
+   [RFC9396]  Lodderstedt, T., Richer, J., and B. Campbell, "OAuth 2.0
+              Rich Authorization Requests", RFC 9396,
+              DOI 10.17487/RFC9396, May 2023,
+              <https://www.rfc-editor.org/rfc/rfc9396>.
+
+8.2.  Informative References
+
+   [ABAC]     Hu, V. and D. Ferraiolo, "Guide to Attribute Based Access
+              Control (ABAC) Definition and Considerations - NIST
+              Special Publication 800-162", January 2014,
+              <https://doi.org/10.6028/NIST.SP.800-162>.
+
+   [XACML]    Rissanen, E., "eXtensible Access Control Markup Language
+              (XACML) Version 3.0, OASIS Standard", January 2013,
+              <https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-
+              spec-os-en.html>.
+
+Acknowledgments
+
+   We would like to thank members of the OpenID AuthZEN Working Group
+   for their valuable feedback during the preparation of this
+   specification.  In particular our thanks go to Gerry Gebel and Allan
+   Foster.
+
+   We would also like to thank Justin Richer and Pieter Kasselman for
+   their guidance on this spec and the overall IETF process.
+
+Authors' Addresses
+
+   David Brossard
+   Axiomatics
+   Email: david.brossard@axiomatics.com
+
+
+   Omri Gazitt
+   Aserto
+   Email: omri@aserto.com
+
+
+   Alex Babeanu
+   3Edges
+   Email: alex@3edges.com
