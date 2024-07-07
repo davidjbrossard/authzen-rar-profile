@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-04T01:33:24.330965+00:00",
+  "timestamp": "2024-07-07T01:40:26.166167+00:00",
   "repo": "davidjbrossard/authzen-rar-profile",
   "labels": [
     {
@@ -50,5 +50,70 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOLm7vjM50k1O7",
+      "title": "some markdown cleanup",
+      "url": "https://github.com/davidjbrossard/authzen-rar-profile/pull/1",
+      "state": "MERGED",
+      "author": "ogazitt",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-06T01:39:20Z",
+      "updatedAt": "2024-07-06T05:38:37Z",
+      "baseRepository": "davidjbrossard/authzen-rar-profile",
+      "baseRefName": "main",
+      "baseRefOid": "08b2b46dd52407427971448cab05b663d7235a77",
+      "headRepository": "davidjbrossard/authzen-rar-profile",
+      "headRefName": "markdown-cleanup",
+      "headRefOid": "973a488f2a0b24a65fd32aea37eedb7bcf5025f3",
+      "closedAt": "2024-07-06T05:37:53Z",
+      "mergedAt": "2024-07-06T05:37:53Z",
+      "mergedBy": "davidjbrossard",
+      "mergeCommit": {
+        "oid": "2342aaaa08f836a36806d576fcf12fe79a76300f"
+      },
+      "comments": [
+        {
+          "author": "davidjbrossard",
+          "authorAssociation": "OWNER",
+          "body": "Merged it, thanks.",
+          "createdAt": "2024-07-06T05:38:30Z",
+          "updatedAt": "2024-07-06T05:38:30Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOLm7vjM50k2m3",
+      "title": "Separate types for authzen apis",
+      "url": "https://github.com/davidjbrossard/authzen-rar-profile/pull/2",
+      "state": "MERGED",
+      "author": "ogazitt",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR proposes having two different values for `authorization_details.type`:\r\n- `authzen_evaluation`\r\n- `authzen_evaluations`\r\n\r\nThis would allow a processor to easily call the correct API for the `request` payload that is passed in as part of the context. \r\n\r\nIt would also set us up to introduce additional types, such as `authzen_subject_search` when we have search APIs defined.\r\n",
+      "createdAt": "2024-07-06T01:48:54Z",
+      "updatedAt": "2024-07-06T05:39:21Z",
+      "baseRepository": "davidjbrossard/authzen-rar-profile",
+      "baseRefName": "main",
+      "baseRefOid": "08b2b46dd52407427971448cab05b663d7235a77",
+      "headRepository": "davidjbrossard/authzen-rar-profile",
+      "headRefName": "separate-types-for-authzen-apis",
+      "headRefOid": "9f8933616223d44c3627829e9fb90f61c22397a5",
+      "closedAt": "2024-07-06T05:39:09Z",
+      "mergedAt": "2024-07-06T05:39:09Z",
+      "mergedBy": "davidjbrossard",
+      "mergeCommit": {
+        "oid": "ba6036b81ae9b6998f41062288bd50326079d061"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
