@@ -355,7 +355,7 @@ This example is based on the one in [RFC9396] under section 3.  Authorization Re
 ]
 ~~~~
 
-# Authorization Detail Responses
+# Authorization Responses
 Whereas [RFC9396] doesn't specify any extensions for `authorization_details` responses, [AUTHZEN] standardizes the responses expected from the PDP. An AuthZEN response is therefore expected for all AuthZEN requests. This response can be used by authorization clients directly or by the AS during token creation. In particular, authorization response can be used in conjunction with any user-consent flow.
 
 The new _authorization\_details_ response structure is as follows:
