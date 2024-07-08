@@ -1,14 +1,10 @@
 ---
 title: "AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization Requests"
-abbrev: "AuthZEN RAR Profile"
-category: info
-
 docname: draft-brossard-oauth-rar-authzen-latest
-submissiontype: IETF
-number: 1
-date: 2024-07-04
-consensus: true
-v: 3
+abbrev: "AuthZEN RAR Profile"
+category: std
+ipr: trust200902
+
 area: "Security"
 workgroup: "Web Authorization Protocol"
 keyword:
@@ -39,63 +35,63 @@ author:
     email: alex@3edges.com
 
 normative:
-    RFC2119:
-    RFC6749:
-    RFC7662:
-    RFC8174:
-    RFC8259:
-    RFC8414:
-    RFC8628:
-    RFC9396:
-    AUTHZEN:
-        target: https://openid.github.io/authzen/
-        title: OpenID AuthZEN Authorization API
-        date: July 2024
-        author:
-        -
-            name: Omri Gazitt
-            ins: O. Gazitt
-            org: Aserto
-        -
-            name: David Brossard
-            ins: D. Brossard
-            org: Axiomatics
-        -
-            name: Atul Tulshibagwale
-            ins: A. Tulshibagwale
-            org: SGNL
-    BOXCAR:
-        target: https://openid.github.io/authzen/authorization-api-1_1#name-access-evaluations-api
-        title: OpenID AuthZEN Authorization API
-        date: July 2024
-        author:
-        -
-            name: Omri Gazitt
-            ins: O. Gazitt
-            org: Aserto
-        -
-            name: David Brossard
-            ins: D. Brossard
-            org: Axiomatics
-        -
-            name: Atul Tulshibagwale
-            ins: A. Tulshibagwale
-            org: SGNL
-    OID-CIBA:
-      target: https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html
-      title: OpenID Connect Client-Initiated Backchannel Authentication Flow - Core 1.0
-      date: 1 September 2021
-      author:
-        -
-          name: G. Fernandez
-        -
-          name: F. Walter
-        -
-          name: A. Nennker
-        -
-          name: D. Tonge
-        -
-          name: B. Campbell
+  RFC2119:
+  RFC6749:
+  RFC7662:
+  RFC8174:
+  RFC8259:
+  RFC8414:
+  RFC8628:
+  RFC9396:
+  AUTHZEN:
+    target: https://openid.github.io/authzen/
+    title: OpenID AuthZEN Authorization API
+    date: July 2024
+    author:
+    -
+      name: Omri Gazitt
+      ins: O. Gazitt
+      org: Aserto
+    -
+      name: David Brossard
+      ins: D. Brossard
+      org: Axiomatics
+    -
+      name: Atul Tulshibagwale
+      ins: A. Tulshibagwale
+      org: SGNL
+  BOXCAR:
+    target: https://openid.github.io/authzen/authorization-api-1_1#name-access-evaluations-api
+    title: OpenID AuthZEN Authorization API
+    date: July 2024
+    author:
+    -
+      name: Omri Gazitt
+      ins: O. Gazitt
+      org: Aserto
+    -
+      name: David Brossard
+      ins: D. Brossard
+      org: Axiomatics
+    -
+      name: Atul Tulshibagwale
+      ins: A. Tulshibagwale
+      org: SGNL
+  OID-CIBA:
+    target: https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html
+    title: OpenID Connect Client-Initiated Backchannel Authentication Flow - Core 1.0
+    date: 1 September 2021
+    author:
+      -
+        name: G. Fernandez
+      -
+        name: F. Walter
+      -
+        name: A. Nennker
+      -
+        name: D. Tonge
+      -
+        name: B. Campbell
 
 informative:
     XACML:
@@ -198,13 +194,13 @@ Note: the aforementioned is indicative only. Always refer to [AUTHZEN] for the f
 
 ## "authorization_details" Structure
 
-Because **type** is **REQUIRED**, the new _authorization\_details_ structure is as follows:
+Because **type** is REQUIRED, the new _authorization\_details_ structure is as follows:
 
 - type:
-An identifier for the authorization details type as a string. The value for this profile is "authzen". The value is case-insensitive. This field is **REQUIRED**.
+An identifier for the authorization details type as a string. The value for this profile is "authzen_evaluation" or "authzen_evaluations", corresponding to the AuthZEN API being invoked. The value is case-insensitive. This field is REQUIRED.
 
 - request:
-this field contains the entire AuthZEN-conformant authorization request. This field is **REQUIRED**.
+this field contains the entire AuthZEN-conformant authorization request. This field is REQUIRED.
 
 ## Authorization Details Types
 
