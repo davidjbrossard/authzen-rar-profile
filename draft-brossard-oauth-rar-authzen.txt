@@ -85,11 +85,14 @@ Table of Contents
      4.1.  Example (non-normative)
    5.  Support for Multiple Authorization Requests
      5.1.  Example (non-normative)
-   6.  Security Considerations
-   7.  IANA Considerations
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   6.  Authorization Responses
+     6.1.  Single-response Example (non-normative)
+     6.2.  Boxcarred-response Example (non-normative)
+   7.  Security Considerations
+   8.  IANA Considerations
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -110,12 +113,11 @@ Table of Contents
    the OAuth 2.0 Rich Authorization Requests [RFC9396].  [RFC9396]
    introduces a new parameter authorization_details that allows clients
    to specify their fine-grained authorization requirements using the
-   expressiveness of JSON [RFC8259] data structures.
-
-   This specification introduces a more structured format for the
-   authorization_details parameter.  The new format is also JSON
-   [RFC8259] as a result of which this specification is conformant with
-   [RFC9396] and is merely a stricter profile.
+   expressiveness of JSON [RFC8259] data structures.  This specification
+   introduces a more structured format for the authorization_details
+   parameter.  The new format is also JSON [RFC8259] as a result of
+   which this specification is conformant with [RFC9396] and is merely a
+   stricter profile.
 
    For example the authorization request for a credit transfer mentioned
    in [RFC9396] would now be structured as follows
@@ -221,6 +223,12 @@ Table of Contents
    "authzen_evaluation" or "authzen_evaluations".  This indicates there
    will be another field called request and its value will be an
    AuthZEN-conformant authorization request.
+
+   The "authzen_evaluation" or "authzen_evaluations" types also indicate
+   that the authorization response should contain a _response_ field
+   containing the authorization response matching the request or
+   requests.  The _response_ field will be an AuthZEN-conformant
+   authorization response (see below).
 
    AuthZEN also defines a _type_ field in the Subject and Resource
    categories.  This field is meant to describe the type of user and/or
@@ -379,18 +387,105 @@ Table of Contents
      }
    ]
 
-6.  Security Considerations
+6.  Authorization Responses
+
+   Whereas [RFC9396] doesn't specify any extensions for
+   authorization_details responses, [AUTHZEN] standardizes the responses
+   expected from the PDP.  An AuthZEN response is therefore expected for
+   all AuthZEN requests.  This response can be used by authorization
+   clients directly or by the AS during token creation.  In particular,
+   authorization response can be used in conjunction with any user-
+   consent flow.
+
+   The new _authorization_details_ response structure is as follows:
+
+   *  type: The value of this field is expected to be
+      "authzen_evaluation" for a single authorization request, or
+      "authzen_evaluations" for multiple (Boxcarred) evalution requests.
+      This field is *REQUIRED*.
+
+   *  response: This field contains the entire AuthZEN-conformant
+      authorization response.  This field is *REQUIRED*.
+
+6.1.  Single-response Example (non-normative)
+
+   [
+     {
+       "type": "authzen_evaluation",
+       "response": {
+           "decision": true
+       }
+     }
+   ]
+
+                  Figure 3: Source Authorization Response
+
+6.2.  Boxcarred-response Example (non-normative)
+
+   Using responses as described in [BOXCAR], a response to the boxcarred
+   example of the multi-authorization requests section above could be:
+
+   [
+     {
+       "type": "authzen_evaluations",
+       "response": {
+         "evaluations": {
+           "eval-1": {
+             "decision": true
+           },
+           "eval-2": {
+             "decision": false,
+             "context": {
+               "reason": "resource not found"
+             }
+           },
+           "eval-3": {
+             "decision": false,
+             "context": {
+               "reason": "Subject is a viewer of the resource"
+             }
+           }
+         }
+       }
+     },
+     {
+       "type": "authzen_evaluations",
+       "response": {
+         "evaluations": {
+           "eval-1": {
+             "decision": true
+           },
+           "eval-2": {
+             "decision": false,
+           },
+           "eval-3": {
+             "decision": false,
+               "context": {
+                 "error": {
+                   "status": 404,
+                   "message": "Resource not found"
+               }
+             }
+           }
+         }
+       }
+     }
+   ]
+
+                  Figure 4: Source Authorization Response
+
+7.  Security Considerations
 
    The Security Considerations of [RFC9396], [RFC6749], [RFC7662], and
    [RFC8414] all apply.
 
-7.  IANA Considerations
+8.  IANA Considerations
 
    This document has no IANA actions.
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -444,7 +539,7 @@ Table of Contents
               <https://openid.net/specs/openid-client-initiated-
               backchannel-authentication-core-1_0.html>.
 
-8.2.  Informative References
+9.2.  Informative References
 
    [XACML]    Rissanen, E., "eXtensible Access Control Markup Language
               (XACML) Version 3.0, OASIS Standard", January 2013,
@@ -480,7 +575,7 @@ Authors' Addresses
    Email: omri@aserto.com
 
 
-   Alex Babeanu
+   Alexandre Babeanu
    3Edges
    Canada
    Email: alex@3edges.com
