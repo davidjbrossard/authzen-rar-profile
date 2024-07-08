@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" class="RFC">
+<html lang="en" class="Internet-Draft">
 <head>
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>RFC 1: AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization Requests</title>
+<title>AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization Requests</title>
 <meta content="David Brossard" name="author">
 <meta content="Omri Gazitt" name="author">
 <meta content="Alex Babeanu" name="author">
 <meta content="
-       This specification defines a profile of OAuth 2.0 Rich Authorization Requests leveraging the OpenID AuthZEN authorization request/response formats within the authorization_details JSON object. Authorization servers and resource servers from different vendors can leverage this profile to request and receive relevant authorization decisions from an AuthZEN-compatible PDP in an interoperable manner. 
+       This specification defines a profile of OAuth 2.0 Rich Authorization Requests leveraging the OpenID AuthZEN authorization request/response formats within the  authorization_details  JSON object. Authorization servers and resource servers from different vendors can leverage this profile to request and receive relevant authorization decisions from an AuthZEN-compatible PDP in an interoperable manner. 
     " name="description">
 <meta content="xml2rfc 3.22.0" name="generator">
 <meta content="authorization" name="keyword">
 <meta content="abac" name="keyword">
 <meta content="authzen" name="keyword">
 <meta content="openid" name="keyword">
-<meta content="1" name="rfc.number">
+<meta content="draft-brossard-oauth-rar-authzen-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.22.0
     Python 3.12.3
@@ -1023,38 +1023,35 @@ svg :is([fill="white"], [fill^="#fff"]) {
 }
 </style>
 
-<link href="https://dx.doi.org/10.17487/rfc1" rel="alternate">
-  <link href="urn:issn:2070-1721" rel="alternate">
-  <link href="https://datatracker.ietf.org/doc/draft-brossard-oauth-rar-authzen-latest" rel="prev">
-  </head>
+</head>
 <body class="xml2rfc">
 <table class="ears">
 <thead><tr>
-<td class="left">RFC 1</td>
+<td class="left">Internet-Draft</td>
 <td class="center">AuthZEN RAR Profile</td>
 <td class="right">July 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Brossard, et al.</td>
-<td class="center">Informational</td>
+<td class="center">Expires 9 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
 <div id="external-metadata" class="document-information"></div>
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
-<dt class="label-stream">Stream:</dt>
-<dd class="stream">Internet Engineering Task Force (IETF)</dd>
-<dt class="label-rfc">RFC:</dt>
-<dd class="rfc"><a href="https://www.rfc-editor.org/rfc/rfc1" class="eref">1</a></dd>
-<dt class="label-category">Category:</dt>
-<dd class="category">Informational</dd>
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Web Authorization Protocol</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-brossard-oauth-rar-authzen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-04" class="published">4 July 2024</time>
+<time datetime="2024-07-08" class="published">8 July 2024</time>
     </dd>
-<dt class="label-issn">ISSN:</dt>
-<dd class="issn">2070-1721</dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2025-01-09">9 January 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1072,11 +1069,26 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="rfcnum">RFC 1</h1>
 <h1 id="title">AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization Requests</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This specification defines a profile of OAuth 2.0 Rich Authorization Requests leveraging the OpenID AuthZEN authorization request/response formats within the authorization_details JSON object. Authorization servers and resource servers from different vendors can leverage this profile to request and receive relevant authorization decisions from an AuthZEN-compatible PDP in an interoperable manner.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This specification defines a profile of OAuth 2.0 Rich Authorization Requests leveraging the OpenID AuthZEN authorization request/response formats within the <code>authorization_details</code> JSON object. Authorization servers and resource servers from different vendors can leverage this profile to request and receive relevant authorization decisions from an AuthZEN-compatible PDP in an interoperable manner.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        The latest revision of this draft can be found at <span><a href="https://davidjbrossard.github.io/authzen-rar-profile/draft-brossard-oauth-rar-authzen.html">https://davidjbrossard.github.io/authzen-rar-profile/draft-brossard-oauth-rar-authzen.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-brossard-oauth-rar-authzen/">https://datatracker.ietf.org/doc/draft-brossard-oauth-rar-authzen/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        Web Authorization Protocol Working Group mailing list (<span><a href="mailto:oauth@ietf.org">mailto:oauth@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/oauth/">https://mailarchive.ietf.org/arch/browse/oauth/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/oauth/">https://www.ietf.org/mailman/listinfo/oauth/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/davidjbrossard/authzen-rar-profile">https://github.com/davidjbrossard/authzen-rar-profile</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1084,19 +1096,20 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
         </h2>
 <p id="section-boilerplate.1-1">
-            This document is not an Internet Standards Track specification; it is
-            published for informational purposes.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-2">
-            This document is a product of the Internet Engineering Task Force
-            (IETF).  It represents the consensus of the IETF community.  It has
-            received public review and has been approved for publication by the
-            Internet Engineering Steering Group (IESG).  Not all documents
-            approved by the IESG are candidates for any level of Internet
-            Standard; see Section 2 of RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-3">
-            Information about the current status of this document, any
-            errata, and how to provide feedback on it may be obtained at
-            <span><a href="https://www.rfc-editor.org/info/rfc1">https://www.rfc-editor.org/info/rfc1</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 9 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1132,10 +1145,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-request-parameter-authoriza" class="internal xref">Request Parameter "authorization_details"</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-request-parameter-authoriza" class="internal xref">Request Parameter <code>authorization_details</code></a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-authorization_details-struc" class="internal xref">"authorization_details" Structure</a></p>
+                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-authorization_details-struc" class="internal xref"><code>authorization_details</code> Structure</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-authorization-details-types" class="internal xref">Authorization Details Types</a></p>
@@ -1193,15 +1206,23 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">OpenID AuthZEN is a Working Group under the OpenID Foundation which aims to increase interoperability and standardization in the authorization realm. In particular, AuthZEN aims to:
-- build standards-based authorization APIs
-- define standard design patterns for authorization
-- produce educational material to help raise awareness of externalized authorization.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">The aim of this profile is to define an AuthZEN-conformant profile of the OAuth 2.0 Rich Authorization Requests <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span>. <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span> introduces a new parameter authorization_details that allows clients to specify their fine-grained authorization requirements using the expressiveness of JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> data structures.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">This specification introduces a more structured format for the authorization_details parameter. The new format is also JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> as a result of which this specification is conformant with <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span> and is merely a stricter profile.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">For example the authorization request for a credit transfer mentioned in <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span> would now be structured as follows<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-1">OpenID AuthZEN is a Working Group under the OpenID Foundation which aims to increase interoperability and standardization in the authorization realm. In particular, AuthZEN aims to:<a href="#section-1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1-2.1">
+          <p id="section-1-2.1.1">build standards-based authorization APIs<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-2.2">
+          <p id="section-1-2.2.1">define standard design patterns for authorization<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-2.3">
+          <p id="section-1-2.3.1">produce educational material to help raise awareness of externalized authorization.<a href="#section-1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-1-3">The aim of this profile is to define an AuthZEN-conformant profile of the OAuth 2.0 Rich Authorization Requests <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span>. <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span> introduces a new parameter <code>authorization_details</code> that allows clients to specify their fine-grained authorization requirements using the expressiveness of JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> data structures.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">This specification introduces a more structured format for the <code>authorization_details</code> parameter. The new format is also JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> as a result of which this specification is conformant with <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span> and is merely a stricter profile.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">For example the authorization request for a credit transfer mentioned in <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span> would now be structured as follows<a href="#section-1-5" class="pilcrow">¶</a></p>
 <span id="name-source-authorization-reques"></span><figure id="figure-1">
-        <div class="lang-language-json sourcecode" id="section-1-5.1">
+        <div class="lang-language-json sourcecode" id="section-1-6.1">
 <pre>
 {
     "subject": {
@@ -1235,7 +1256,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-source-authorization-reques" class="selfRef">Source Authorization Request</a>
         </figcaption></figure>
-<p id="section-1-6">Using AuthZEN as a format for authorization_details will increase the usability and the interoperability of <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span>. In particular, it will be possible for the AS to forward the contents of the authorization_details parameter to an AuthZEN-conformant Policy Decision Point (PDP).<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-7">Using AuthZEN as a format for <code>authorization_details</code> will increase the usability and the interoperability of <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span>. In particular, it will be possible for the AS to forward the contents of the <code>authorization_details</code> parameter to an AuthZEN-conformant Policy Decision Point (PDP).<a href="#section-1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1254,33 +1275,43 @@ This specification uses the terms "PDP" and "PEP" defined by <span>[<a href="#AB
 <div id="request-parameter-authorizationdetails">
 <section id="section-3">
       <h2 id="name-request-parameter-authoriza">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-request-parameter-authoriza" class="section-name selfRef">Request Parameter "authorization_details"</a>
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-request-parameter-authoriza" class="section-name selfRef">Request Parameter <code>authorization_details</code></a>
       </h2>
-<p id="section-3-1">In <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span>, the request parameter authorization_details contains, in JSON
+<p id="section-3-1">In <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span>, the request parameter <code>authorization_details</code> contains, in JSON
 notation, an array of objects.  Each JSON object contains the data to
 specify the authorization requirements for a certain type of
 resource. This specification defines the format for each one of these objects
 such that it conforms to <span>[<a href="#AUTHZEN" class="cite xref">AUTHZEN</a>]</span> and <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2"><span>[<a href="#AUTHZEN" class="cite xref">AUTHZEN</a>]</span> groups JSON datastructures into 4 JSON objects:
-- subject: A Subject is the user or robotic principal about whom the Authorization API is being invoked. The Subject may be requesting access at the time the Authorization API is invoked.
-- resource: A Resource is the target of an access request. It is a JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>) object that is constructed similar to a Subject entity.
-- action: An Action is the type of access that the requester intends to perform. Action is a JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>) object that contains at least a name field.
-- context: The Context object is a set of attributes that represent environmental or contextual data about the request such as time of day. It is a JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>) object.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">Note: the aforementioned is indicative only. Always refer to <span>[<a href="#AUTHZEN" class="cite xref">AUTHZEN</a>]</span> for the formal definition of each element.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-2"><span>[<a href="#AUTHZEN" class="cite xref">AUTHZEN</a>]</span> groups JSON datastructures into 4 JSON objects:<a href="#section-3-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-3.1">
+          <p id="section-3-3.1.1">subject: A Subject is the user or robotic principal about whom the Authorization API is being invoked. The Subject may be requesting access at the time the Authorization API is invoked.<a href="#section-3-3.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-3.2">
+          <p id="section-3-3.2.1">resource: A Resource is the target of an access request. It is a JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>) object that is constructed similar to a Subject entity.<a href="#section-3-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-3.3">
+          <p id="section-3-3.3.1">action: An Action is the type of access that the requester intends to perform. Action is a JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>) object that contains at least a name field.<a href="#section-3-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-3.4">
+          <p id="section-3-3.4.1">context: The Context object is a set of attributes that represent environmental or contextual data about the request such as time of day. It is a JSON (<span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>) object.<a href="#section-3-3.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-3-4">Note: the aforementioned is indicative only. Always refer to <span>[<a href="#AUTHZEN" class="cite xref">AUTHZEN</a>]</span> for the formal definition of each element.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <div id="authorizationdetails-structure">
 <section id="section-3.1">
         <h3 id="name-authorization_details-struc">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-authorization_details-struc" class="section-name selfRef">"authorization_details" Structure</a>
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-authorization_details-struc" class="section-name selfRef"><code>authorization_details</code> Structure</a>
         </h3>
-<p id="section-3.1-1">Because <strong>type</strong> is <strong><span class="bcp14">REQUIRED</span></strong>, the new <em>authorization_details</em> structure is as follows:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">Because <strong>type</strong> is <span class="bcp14">REQUIRED</span>, the new <em>authorization_details</em> structure is as follows:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1-2.1">
             <p id="section-3.1-2.1.1">type:
-An identifier for the authorization details type as a string. The value for this profile is "authzen". The value is case-insensitive. This field is <strong><span class="bcp14">REQUIRED</span></strong>.<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
+An identifier for the authorization details type as a string. The value for this profile is "authzen_evaluation" or "authzen_evaluations", corresponding to the AuthZEN API being invoked. The value is case-insensitive. This field is <span class="bcp14">REQUIRED</span>.<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-2.2">
             <p id="section-3.1-2.2.1">request:
-this field contains the entire AuthZEN-conformant authorization request. This field is <strong><span class="bcp14">REQUIRED</span></strong>.<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
+this field contains the entire AuthZEN-conformant authorization request. This field is <span class="bcp14">REQUIRED</span>.<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1290,7 +1321,7 @@ this field contains the entire AuthZEN-conformant authorization request. This fi
         <h3 id="name-authorization-details-types">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-authorization-details-types" class="section-name selfRef">Authorization Details Types</a>
         </h3>
-<p id="section-3.2-1">This profile declares a new value for the <em>type</em> field as stated in the previous section. The value for this profile is "authzen". This indicates there will be a field called request and its value will be an AuthZEN-conformant authorization request.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">This profile declares a new value for the <em>type</em> field as stated in the previous section. The value for this profile is "authzen_evaluation" or "authzen_evaluations". This indicates there will be another field called <code>request</code> and its value will be an AuthZEN-conformant authorization request.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">AuthZEN also defines a <em>type</em> field in the Subject and Resource categories. This field is meant to describe the type of user and/or resource required.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1299,7 +1330,7 @@ this field contains the entire AuthZEN-conformant authorization request. This fi
         <h3 id="name-common-data-fields">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-common-data-fields" class="section-name selfRef">Common Data Fields</a>
         </h3>
-<p id="section-3.3-1">No field other than type and authzen shall be allowed in authorization_details when the type is "authzen". All other fields such as the ones mentioned in <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span> shall be inserted inside the AuthZEN request in the relevant object (Subject, Resource, Action, or Context).<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-1">No field other than <code>type</code> and <code>request</code> shall be allowed in <code>authorization_details</code> when the type is <code>authzen_evaluation</code> or <code>authzen_evaluations</code>. All other fields such as the ones mentioned in <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span> shall be inserted inside the AuthZEN request in the relevant object (Subject, Resource, Action, or Context).<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1309,7 +1340,7 @@ this field contains the entire AuthZEN-conformant authorization request. This fi
       <h2 id="name-authorization-request">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-authorization-request" class="section-name selfRef">Authorization Request</a>
       </h2>
-<p id="section-4-1">Conformant to <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span>, the authorization_details authorization request parameter can be used to specify authorization requirements in all places where the scope parameter is used for the same purpose, examples include:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">Conformant to <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span>, the <code>authorization_details</code> authorization request parameter can be used to specify authorization requirements in all places where the scope parameter is used for the same purpose, examples include:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4-2.1">
           <p id="section-4-2.1.1">authorization requests as specified in <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span><a href="#section-4-2.1.1" class="pilcrow">¶</a></p>
@@ -1331,7 +1362,7 @@ this field contains the entire AuthZEN-conformant authorization request. This fi
           <div class="lang-language-json sourcecode" id="section-4.1-1.1">
 <pre>
 {
-  "type": "authzen",
+  "type": "authzen_evaluation",
   "request":
     {
         "subject": {
@@ -1388,7 +1419,7 @@ possible and the use of the <code>authorization_details</code> array otherwise.<
 <pre>
 [
   {
-    "type": "authzen",
+    "type": "authzen_evaluations",
     "request":
     {
       "subject": {
@@ -1420,7 +1451,7 @@ possible and the use of the <code>authorization_details</code> array otherwise.<
     }
   },
   {
-    "type": "authzen",
+    "type": "authzen_evaluations",
     "request":
     {
       "subject": {
@@ -1498,6 +1529,38 @@ possible and the use of the <code>authorization_details</code> array otherwise.<
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6749">[RFC6749]</dt>
+        <dd>
+<span class="refAuthor">Hardt, D., Ed.</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework"</span>, <span class="seriesInfo">RFC 6749</span>, <span class="seriesInfo">DOI 10.17487/RFC6749</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7662">[RFC7662]</dt>
+        <dd>
+<span class="refAuthor">Richer, J., Ed.</span>, <span class="refTitle">"OAuth 2.0 Token Introspection"</span>, <span class="seriesInfo">RFC 7662</span>, <span class="seriesInfo">DOI 10.17487/RFC7662</span>, <time datetime="2015-10" class="refDate">October 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7662">https://www.rfc-editor.org/info/rfc7662</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8259">[RFC8259]</dt>
+        <dd>
+<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">RFC 8259</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8414">[RFC8414]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata"</span>, <span class="seriesInfo">RFC 8414</span>, <span class="seriesInfo">DOI 10.17487/RFC8414</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8628">[RFC8628]</dt>
+        <dd>
+<span class="refAuthor">Denniss, W.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"OAuth 2.0 Device Authorization Grant"</span>, <span class="seriesInfo">RFC 8628</span>, <span class="seriesInfo">DOI 10.17487/RFC8628</span>, <time datetime="2019-08" class="refDate">August 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8628">https://www.rfc-editor.org/info/rfc8628</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9396">[RFC9396]</dt>
+        <dd>
+<span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Richer, J.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"OAuth 2.0 Rich Authorization Requests"</span>, <span class="seriesInfo">RFC 9396</span>, <span class="seriesInfo">DOI 10.17487/RFC9396</span>, <time datetime="2023-05" class="refDate">May 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9396">https://www.rfc-editor.org/info/rfc9396</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="AUTHZEN">[AUTHZEN]</dt>
         <dd>
 <span class="refAuthor">Gazitt, O.</span>, <span class="refAuthor">Brossard, D.</span>, and <span class="refAuthor">A. Tulshibagwale</span>, <span class="refTitle">"OpenID AuthZEN Authorization API"</span>, <time datetime="2024-07" class="refDate">July 2024</time>, <span>&lt;<a href="https://openid.github.io/authzen/">https://openid.github.io/authzen/</a>&gt;</span>. </dd>
@@ -1507,40 +1570,8 @@ possible and the use of the <code>authorization_details</code> array otherwise.<
 <span class="refAuthor">Gazitt, O.</span>, <span class="refAuthor">Brossard, D.</span>, and <span class="refAuthor">A. Tulshibagwale</span>, <span class="refTitle">"OpenID AuthZEN Authorization API"</span>, <time datetime="2024-07" class="refDate">July 2024</time>, <span>&lt;<a href="https://openid.github.io/authzen/authorization-api-1_1#name-access-evaluations-api">https://openid.github.io/authzen/authorization-api-1_1#name-access-evaluations-api</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OID-CIBA">[OID-CIBA]</dt>
-        <dd>
-<span class="refAuthor">Fernandez, G.</span>, <span class="refAuthor">Walter, F.</span>, <span class="refAuthor">Nennker, A.</span>, <span class="refAuthor">Tonge, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"OpenID Connect Client-Initiated Backchannel Authentication Flow - Core 1.0"</span>, <time datetime="2021-09" class="refDate">September 2021</time>, <span>&lt;<a href="https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html">https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC2119">[RFC2119]</dt>
-        <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6749">[RFC6749]</dt>
-        <dd>
-<span class="refAuthor">Hardt, D., Ed.</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework"</span>, <span class="seriesInfo">RFC 6749</span>, <span class="seriesInfo">DOI 10.17487/RFC6749</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6749">https://www.rfc-editor.org/rfc/rfc6749</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC7662">[RFC7662]</dt>
-        <dd>
-<span class="refAuthor">Richer, J., Ed.</span>, <span class="refTitle">"OAuth 2.0 Token Introspection"</span>, <span class="seriesInfo">RFC 7662</span>, <span class="seriesInfo">DOI 10.17487/RFC7662</span>, <time datetime="2015-10" class="refDate">October 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7662">https://www.rfc-editor.org/rfc/rfc7662</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8174">[RFC8174]</dt>
-        <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8259">[RFC8259]</dt>
-        <dd>
-<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">RFC 8259</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8259">https://www.rfc-editor.org/rfc/rfc8259</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8414">[RFC8414]</dt>
-        <dd>
-<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata"</span>, <span class="seriesInfo">RFC 8414</span>, <span class="seriesInfo">DOI 10.17487/RFC8414</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8414">https://www.rfc-editor.org/rfc/rfc8414</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8628">[RFC8628]</dt>
-        <dd>
-<span class="refAuthor">Denniss, W.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"OAuth 2.0 Device Authorization Grant"</span>, <span class="seriesInfo">RFC 8628</span>, <span class="seriesInfo">DOI 10.17487/RFC8628</span>, <time datetime="2019-08" class="refDate">August 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8628">https://www.rfc-editor.org/rfc/rfc8628</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9396">[RFC9396]</dt>
       <dd>
-<span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Richer, J.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"OAuth 2.0 Rich Authorization Requests"</span>, <span class="seriesInfo">RFC 9396</span>, <span class="seriesInfo">DOI 10.17487/RFC9396</span>, <time datetime="2023-05" class="refDate">May 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9396">https://www.rfc-editor.org/rfc/rfc9396</a>&gt;</span>. </dd>
+<span class="refAuthor">Fernandez, G.</span>, <span class="refAuthor">Walter, F.</span>, <span class="refAuthor">Nennker, A.</span>, <span class="refAuthor">Tonge, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"OpenID Connect Client-Initiated Backchannel Authentication Flow - Core 1.0"</span>, <time datetime="2021-09" class="refDate">September 2021</time>, <span>&lt;<a href="https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html">https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1551,13 +1582,13 @@ possible and the use of the <code>authorization_details</code> array otherwise.<
 <a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="ABAC">[ABAC]</dt>
-        <dd>
-<span class="refAuthor">Hu, V.</span> and <span class="refAuthor">D. Ferraiolo</span>, <span class="refTitle">"Guide to Attribute Based Access Control (ABAC) Definition and Considerations - NIST Special Publication 800-162"</span>, <time datetime="2014-01" class="refDate">January 2014</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.SP.800-162">https://doi.org/10.6028/NIST.SP.800-162</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="XACML">[XACML]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Rissanen, E.</span>, <span class="refTitle">"eXtensible Access Control Markup Language (XACML) Version 3.0, OASIS Standard"</span>, <time datetime="2013-01" class="refDate">January 2013</time>, <span>&lt;<a href="https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html">https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ABAC">[ABAC]</dt>
+      <dd>
+<span class="refAuthor">Hu, V.</span> and <span class="refAuthor">D. Ferraiolo</span>, <span class="refTitle">"Guide to Attribute Based Access Control (ABAC) Definition and Considerations - NIST Special Publication 800-162"</span>, <time datetime="2014-01" class="refDate">January 2014</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.SP.800-162">https://doi.org/10.6028/NIST.SP.800-162</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1583,6 +1614,7 @@ possible and the use of the <code>authorization_details</code> array otherwise.<
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">David Brossard</span></div>
 <div dir="auto" class="left"><span class="org">Axiomatics</span></div>
+<div dir="auto" class="left"><span class="country-name">Canada</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:david.brossard@axiomatics.com" class="email">david.brossard@axiomatics.com</a>
@@ -1591,6 +1623,7 @@ possible and the use of the <code>authorization_details</code> array otherwise.<
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Omri Gazitt</span></div>
 <div dir="auto" class="left"><span class="org">Aserto</span></div>
+<div dir="auto" class="left"><span class="country-name">United States of America</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:omri@aserto.com" class="email">omri@aserto.com</a>
@@ -1599,6 +1632,7 @@ possible and the use of the <code>authorization_details</code> array otherwise.<
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Alex Babeanu</span></div>
 <div dir="auto" class="left"><span class="org">3Edges</span></div>
+<div dir="auto" class="left"><span class="country-name">Canada</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:alex@3edges.com" class="email">alex@3edges.com</a>

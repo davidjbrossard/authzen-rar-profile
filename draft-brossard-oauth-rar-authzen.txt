@@ -2,17 +2,18 @@
 
 
 
-Internet Engineering Task Force (IETF)                       D. Brossard
-Request for Comments: 1                                       Axiomatics
-Category: Informational                                        O. Gazitt
-ISSN: 2070-1721                                                   Aserto
+Web Authorization Protocol                                   D. Brossard
+Internet-Draft                                                Axiomatics
+Intended status: Standards Track                               O. Gazitt
+Expires: 9 January 2025                                           Aserto
                                                               A. Babeanu
                                                                   3Edges
-                                                             4 July 2024
+                                                             8 July 2024
 
 
    AuthZEN Request/Response Profile for OAuth 2.0 Rich Authorization
                                 Requests
+                draft-brossard-oauth-rar-authzen-latest
 
 Abstract
 
@@ -23,21 +24,40 @@ Abstract
    profile to request and receive relevant authorization decisions from
    an AuthZEN-compatible PDP in an interoperable manner.
 
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://davidjbrossard.github.io/authzen-rar-profile/draft-brossard-
+   oauth-rar-authzen.html.  Status information for this document may be
+   found at https://datatracker.ietf.org/doc/draft-brossard-oauth-rar-
+   authzen/.
+
+   Discussion of this document takes place on the Web Authorization
+   Protocol Working Group mailing list (mailto:oauth@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/oauth/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/oauth/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/davidjbrossard/authzen-rar-profile.
+
 Status of This Memo
 
-   This document is not an Internet Standards Track specification; it is
-   published for informational purposes.
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
 
-   This document is a product of the Internet Engineering Task Force
-   (IETF).  It represents the consensus of the IETF community.  It has
-   received public review and has been approved for publication by the
-   Internet Engineering Steering Group (IESG).  Not all documents
-   approved by the IESG are candidates for any level of Internet
-   Standard; see Section 2 of RFC 7841.
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
 
-   Information about the current status of this document, any errata,
-   and how to provide feedback on it may be obtained at
-   https://www.rfc-editor.org/info/rfc1.
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 9 January 2025.
 
 Copyright Notice
 
@@ -45,21 +65,20 @@ Copyright Notice
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents
-   (https://trustee.ietf.org/license-info) in effect on the date of
-   publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
-   include Revised BSD License text as described in Section 4.e of the
-   Trust Legal Provisions and are provided without warranty as described
-   in the Revised BSD License.
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
 
 Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Request Parameter "authorization_details"
-     3.1.  "authorization_details" Structure
+   3.  Request Parameter authorization_details
+     3.1.  authorization_details Structure
      3.2.  Authorization Details Types
      3.3.  Common Data Fields
    4.  Authorization Request
@@ -78,10 +97,14 @@ Table of Contents
 
    OpenID AuthZEN is a Working Group under the OpenID Foundation which
    aims to increase interoperability and standardization in the
-   authorization realm.  In particular, AuthZEN aims to: - build
-   standards-based authorization APIs - define standard design patterns
-   for authorization - produce educational material to help raise
-   awareness of externalized authorization.
+   authorization realm.  In particular, AuthZEN aims to:
+
+   *  build standards-based authorization APIs
+
+   *  define standard design patterns for authorization
+
+   *  produce educational material to help raise awareness of
+      externalized authorization.
 
    The aim of this profile is to define an AuthZEN-conformant profile of
    the OAuth 2.0 Rich Authorization Requests [RFC9396].  [RFC9396]
@@ -149,7 +172,7 @@ Table of Contents
    Framework" [RFC6749].  This specification uses the terms "PDP" and
    "PEP" defined by [ABAC] and [XACML].
 
-3.  Request Parameter "authorization_details"
+3.  Request Parameter authorization_details
 
    In [RFC9396], the request parameter authorization_details contains,
    in JSON notation, an array of objects.  Each JSON object contains the
@@ -157,39 +180,47 @@ Table of Contents
    resource.  This specification defines the format for each one of
    these objects such that it conforms to [AUTHZEN] and [RFC9396].
 
-   [AUTHZEN] groups JSON datastructures into 4 JSON objects: - subject:
-   A Subject is the user or robotic principal about whom the
-   Authorization API is being invoked.  The Subject may be requesting
-   access at the time the Authorization API is invoked. - resource: A
-   Resource is the target of an access request.  It is a JSON
-   ([RFC8259]) object that is constructed similar to a Subject entity. -
-   action: An Action is the type of access that the requester intends to
-   perform.  Action is a JSON ([RFC8259]) object that contains at least
-   a name field. - context: The Context object is a set of attributes
-   that represent environmental or contextual data about the request
-   such as time of day.  It is a JSON ([RFC8259]) object.
+   [AUTHZEN] groups JSON datastructures into 4 JSON objects:
+
+   *  subject: A Subject is the user or robotic principal about whom the
+      Authorization API is being invoked.  The Subject may be requesting
+      access at the time the Authorization API is invoked.
+
+   *  resource: A Resource is the target of an access request.  It is a
+      JSON ([RFC8259]) object that is constructed similar to a Subject
+      entity.
+
+   *  action: An Action is the type of access that the requester intends
+      to perform.  Action is a JSON ([RFC8259]) object that contains at
+      least a name field.
+
+   *  context: The Context object is a set of attributes that represent
+      environmental or contextual data about the request such as time of
+      day.  It is a JSON ([RFC8259]) object.
 
    Note: the aforementioned is indicative only.  Always refer to
    [AUTHZEN] for the formal definition of each element.
 
-3.1.  "authorization_details" Structure
+3.1.  authorization_details Structure
 
-   Because *type* is *REQUIRED*, the new _authorization_details_
-   structure is as follows:
+   Because *type* is REQUIRED, the new _authorization_details_ structure
+   is as follows:
 
    *  type: An identifier for the authorization details type as a
-      string.  The value for this profile is "authzen".  The value is
-      case-insensitive.  This field is *REQUIRED*.
+      string.  The value for this profile is "authzen_evaluation" or
+      "authzen_evaluations", corresponding to the AuthZEN API being
+      invoked.  The value is case-insensitive.  This field is REQUIRED.
 
    *  request: this field contains the entire AuthZEN-conformant
-      authorization request.  This field is *REQUIRED*.
+      authorization request.  This field is REQUIRED.
 
 3.2.  Authorization Details Types
 
    This profile declares a new value for the _type_ field as stated in
-   the previous section.  The value for this profile is "authzen".  This
-   indicates there will be a field called request and its value will be
-   an AuthZEN-conformant authorization request.
+   the previous section.  The value for this profile is
+   "authzen_evaluation" or "authzen_evaluations".  This indicates there
+   will be another field called request and its value will be an
+   AuthZEN-conformant authorization request.
 
    AuthZEN also defines a _type_ field in the Subject and Resource
    categories.  This field is meant to describe the type of user and/or
@@ -197,11 +228,11 @@ Table of Contents
 
 3.3.  Common Data Fields
 
-   No field other than type and authzen shall be allowed in
-   authorization_details when the type is "authzen".  All other fields
-   such as the ones mentioned in [RFC9396] shall be inserted inside the
-   AuthZEN request in the relevant object (Subject, Resource, Action, or
-   Context).
+   No field other than type and request shall be allowed in
+   authorization_details when the type is authzen_evaluation or
+   authzen_evaluations.  All other fields such as the ones mentioned in
+   [RFC9396] shall be inserted inside the AuthZEN request in the
+   relevant object (Subject, Resource, Action, or Context).
 
 4.  Authorization Request
 
@@ -221,7 +252,7 @@ Table of Contents
 4.1.  Example (non-normative)
 
    {
-     "type": "authzen",
+     "type": "authzen_evaluation",
      "request":
        {
            "subject": {
@@ -269,7 +300,7 @@ Table of Contents
 
    [
      {
-       "type": "authzen",
+       "type": "authzen_evaluations",
        "request":
        {
          "subject": {
@@ -301,7 +332,7 @@ Table of Contents
        }
      },
      {
-       "type": "authzen",
+       "type": "authzen_evaluations",
        "request":
        {
          "subject": {
@@ -361,6 +392,43 @@ Table of Contents
 
 8.1.  Normative References
 
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
+              RFC 6749, DOI 10.17487/RFC6749, October 2012,
+              <https://www.rfc-editor.org/info/rfc6749>.
+
+   [RFC7662]  Richer, J., Ed., "OAuth 2.0 Token Introspection",
+              RFC 7662, DOI 10.17487/RFC7662, October 2015,
+              <https://www.rfc-editor.org/info/rfc7662>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", STD 90, RFC 8259,
+              DOI 10.17487/RFC8259, December 2017,
+              <https://www.rfc-editor.org/info/rfc8259>.
+
+   [RFC8414]  Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Authorization Server Metadata", RFC 8414,
+              DOI 10.17487/RFC8414, June 2018,
+              <https://www.rfc-editor.org/info/rfc8414>.
+
+   [RFC8628]  Denniss, W., Bradley, J., Jones, M., and H. Tschofenig,
+              "OAuth 2.0 Device Authorization Grant", RFC 8628,
+              DOI 10.17487/RFC8628, August 2019,
+              <https://www.rfc-editor.org/info/rfc8628>.
+
+   [RFC9396]  Lodderstedt, T., Richer, J., and B. Campbell, "OAuth 2.0
+              Rich Authorization Requests", RFC 9396,
+              DOI 10.17487/RFC9396, May 2023,
+              <https://www.rfc-editor.org/info/rfc9396>.
+
    [AUTHZEN]  Gazitt, O., Brossard, D., and A. Tulshibagwale, "OpenID
               AuthZEN Authorization API", July 2024,
               <https://openid.github.io/authzen/>.
@@ -376,54 +444,17 @@ Table of Contents
               <https://openid.net/specs/openid-client-initiated-
               backchannel-authentication-core-1_0.html>.
 
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/rfc/rfc2119>.
-
-   [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
-              RFC 6749, DOI 10.17487/RFC6749, October 2012,
-              <https://www.rfc-editor.org/rfc/rfc6749>.
-
-   [RFC7662]  Richer, J., Ed., "OAuth 2.0 Token Introspection",
-              RFC 7662, DOI 10.17487/RFC7662, October 2015,
-              <https://www.rfc-editor.org/rfc/rfc7662>.
-
-   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
-              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
-
-   [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
-              Interchange Format", STD 90, RFC 8259,
-              DOI 10.17487/RFC8259, December 2017,
-              <https://www.rfc-editor.org/rfc/rfc8259>.
-
-   [RFC8414]  Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
-              Authorization Server Metadata", RFC 8414,
-              DOI 10.17487/RFC8414, June 2018,
-              <https://www.rfc-editor.org/rfc/rfc8414>.
-
-   [RFC8628]  Denniss, W., Bradley, J., Jones, M., and H. Tschofenig,
-              "OAuth 2.0 Device Authorization Grant", RFC 8628,
-              DOI 10.17487/RFC8628, August 2019,
-              <https://www.rfc-editor.org/rfc/rfc8628>.
-
-   [RFC9396]  Lodderstedt, T., Richer, J., and B. Campbell, "OAuth 2.0
-              Rich Authorization Requests", RFC 9396,
-              DOI 10.17487/RFC9396, May 2023,
-              <https://www.rfc-editor.org/rfc/rfc9396>.
-
 8.2.  Informative References
-
-   [ABAC]     Hu, V. and D. Ferraiolo, "Guide to Attribute Based Access
-              Control (ABAC) Definition and Considerations - NIST
-              Special Publication 800-162", January 2014,
-              <https://doi.org/10.6028/NIST.SP.800-162>.
 
    [XACML]    Rissanen, E., "eXtensible Access Control Markup Language
               (XACML) Version 3.0, OASIS Standard", January 2013,
               <https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-
               spec-os-en.html>.
+
+   [ABAC]     Hu, V. and D. Ferraiolo, "Guide to Attribute Based Access
+              Control (ABAC) Definition and Considerations - NIST
+              Special Publication 800-162", January 2014,
+              <https://doi.org/10.6028/NIST.SP.800-162>.
 
 Acknowledgments
 
@@ -439,14 +470,17 @@ Authors' Addresses
 
    David Brossard
    Axiomatics
+   Canada
    Email: david.brossard@axiomatics.com
 
 
    Omri Gazitt
    Aserto
+   United States of America
    Email: omri@aserto.com
 
 
    Alex Babeanu
    3Edges
+   Canada
    Email: alex@3edges.com
