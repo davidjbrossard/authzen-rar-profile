@@ -77,8 +77,8 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Request Parameter "authorization_details"
-     3.1.  "authorization_details" Structure
+   3.  Request Parameter authorization_details
+     3.1.  authorization_details Structure
      3.2.  Authorization Details Types
      3.3.  Common Data Fields
    4.  Authorization Request
@@ -100,21 +100,24 @@ Table of Contents
 
    OpenID AuthZEN is a Working Group under the OpenID Foundation which
    aims to increase interoperability and standardization in the
-   authorization realm.  In particular, AuthZEN aims to: - build
-   standards-based authorization APIs - define standard design patterns
-   for authorization - produce educational material to help raise
-   awareness of externalized authorization.
+   authorization realm.  In particular, AuthZEN aims to:
+
+   *  build standards-based authorization APIs
+
+   *  define standard design patterns for authorization
+
+   *  produce educational material to help raise awareness of
+      externalized authorization.
 
    The aim of this profile is to define an AuthZEN-conformant profile of
    the OAuth 2.0 Rich Authorization Requests [RFC9396].  [RFC9396]
    introduces a new parameter authorization_details that allows clients
    to specify their fine-grained authorization requirements using the
-   expressiveness of JSON [RFC8259] data structures.
-
-   This specification introduces a more structured format for the
-   authorization_details parameter.  The new format is also JSON
-   [RFC8259] as a result of which this specification is conformant with
-   [RFC9396] and is merely a stricter profile.
+   expressiveness of JSON [RFC8259] data structures.  This specification
+   introduces a more structured format for the authorization_details
+   parameter.  The new format is also JSON [RFC8259] as a result of
+   which this specification is conformant with [RFC9396] and is merely a
+   stricter profile.
 
    For example the authorization request for a credit transfer mentioned
    in [RFC9396] would now be structured as follows
@@ -171,7 +174,7 @@ Table of Contents
    Framework" [RFC6749].  This specification uses the terms "PDP" and
    "PEP" defined by [ABAC] and [XACML].
 
-3.  Request Parameter "authorization_details"
+3.  Request Parameter authorization_details
 
    In [RFC9396], the request parameter authorization_details contains,
    in JSON notation, an array of objects.  Each JSON object contains the
@@ -179,22 +182,28 @@ Table of Contents
    resource.  This specification defines the format for each one of
    these objects such that it conforms to [AUTHZEN] and [RFC9396].
 
-   [AUTHZEN] groups JSON datastructures into 4 JSON objects: - subject:
-   A Subject is the user or robotic principal about whom the
-   Authorization API is being invoked.  The Subject may be requesting
-   access at the time the Authorization API is invoked. - resource: A
-   Resource is the target of an access request.  It is a JSON
-   ([RFC8259]) object that is constructed similar to a Subject entity. -
-   action: An Action is the type of access that the requester intends to
-   perform.  Action is a JSON ([RFC8259]) object that contains at least
-   a name field. - context: The Context object is a set of attributes
-   that represent environmental or contextual data about the request
-   such as time of day.  It is a JSON ([RFC8259]) object.
+   [AUTHZEN] groups JSON datastructures into 4 JSON objects:
+
+   *  subject: A Subject is the user or robotic principal about whom the
+      Authorization API is being invoked.  The Subject may be requesting
+      access at the time the Authorization API is invoked.
+
+   *  resource: A Resource is the target of an access request.  It is a
+      JSON ([RFC8259]) object that is constructed similar to a Subject
+      entity.
+
+   *  action: An Action is the type of access that the requester intends
+      to perform.  Action is a JSON ([RFC8259]) object that contains at
+      least a name field.
+
+   *  context: The Context object is a set of attributes that represent
+      environmental or contextual data about the request such as time of
+      day.  It is a JSON ([RFC8259]) object.
 
    Note: the aforementioned is indicative only.  Always refer to
    [AUTHZEN] for the formal definition of each element.
 
-3.1.  "authorization_details" Structure
+3.1.  authorization_details Structure
 
    Because *type* is REQUIRED, the new _authorization_details_ structure
    is as follows:
@@ -210,14 +219,16 @@ Table of Contents
 3.2.  Authorization Details Types
 
    This profile declares a new value for the _type_ field as stated in
-   the previous section.  The value for this profile is "authzen".  This
-   indicates there will be a field called _request_ and its value will
-   be an AuthZEN-conformant authorization request.
+   the previous section.  The value for this profile is
+   "authzen_evaluation" or "authzen_evaluations".  This indicates there
+   will be another field called request and its value will be an
+   AuthZEN-conformant authorization request.
 
-   The "authzen" type also indicates that the authorization response
-   should contain a _response_ field containing the authorization
-   response matching the request or requests.  The _response_ field will
-   be an AuthZEN-conformant authorization response (see below).
+   The "authzen_evaluation" or "authzen_evaluations" types also indicate
+   that the authorization response should contain a _response_ field
+   containing the authorization response matching the request or
+   requests.  The _response_ field will be an AuthZEN-conformant
+   authorization response (see below).
 
    AuthZEN also defines a _type_ field in the Subject and Resource
    categories.  This field is meant to describe the type of user and/or
@@ -225,11 +236,11 @@ Table of Contents
 
 3.3.  Common Data Fields
 
-   No field other than type and authzen shall be allowed in
-   authorization_details when the type is "authzen".  All other fields
-   such as the ones mentioned in [RFC9396] shall be inserted inside the
-   AuthZEN request in the relevant object (Subject, Resource, Action, or
-   Context).
+   No field other than type and request shall be allowed in
+   authorization_details when the type is authzen_evaluation or
+   authzen_evaluations.  All other fields such as the ones mentioned in
+   [RFC9396] shall be inserted inside the AuthZEN request in the
+   relevant object (Subject, Resource, Action, or Context).
 
 4.  Authorization Request
 
@@ -249,7 +260,7 @@ Table of Contents
 4.1.  Example (non-normative)
 
    {
-     "type": "authzen",
+     "type": "authzen_evaluation",
      "request":
        {
            "subject": {
@@ -297,7 +308,7 @@ Table of Contents
 
    [
      {
-       "type": "authzen",
+       "type": "authzen_evaluations",
        "request":
        {
          "subject": {
@@ -329,7 +340,7 @@ Table of Contents
        }
      },
      {
-       "type": "authzen",
+       "type": "authzen_evaluations",
        "request":
        {
          "subject": {
@@ -388,8 +399,10 @@ Table of Contents
 
    The new _authorization_details_ response structure is as follows:
 
-   *  type: The value of this field is expected to be "authzen".  This
-      field is *REQUIRED*.
+   *  type: The value of this field is expected to be
+      "authzen_evaluation" for a single authorization request, or
+      "authzen_evaluations" for multiple (Boxcarred) evalution requests.
+      This field is *REQUIRED*.
 
    *  response: This field contains the entire AuthZEN-conformant
       authorization response.  This field is *REQUIRED*.
@@ -398,7 +411,7 @@ Table of Contents
 
    [
      {
-       "type": "authzen",
+       "type": "authzen_evaluation",
        "response": {
            "decision": true
        }
@@ -414,7 +427,7 @@ Table of Contents
 
    [
      {
-       "type": "authzen",
+       "type": "authzen_evaluations",
        "response": {
          "evaluations": {
            "eval-1": {
@@ -436,7 +449,7 @@ Table of Contents
        }
      },
      {
-       "type": "authzen",
+       "type": "authzen_evaluations",
        "response": {
          "evaluations": {
            "eval-1": {
@@ -552,14 +565,17 @@ Authors' Addresses
 
    David Brossard
    Axiomatics
+   Canada
    Email: david.brossard@axiomatics.com
 
 
    Omri Gazitt
    Aserto
+   United States of America
    Email: omri@aserto.com
 
 
    Alexandre Babeanu
    3Edges
+   Canada
    Email: alex@3edges.com
