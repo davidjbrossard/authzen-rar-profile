@@ -32,7 +32,7 @@ author:
     email: omri@aserto.com
     country: United States of America
  -
-    fullname: Alex Babeanu
+    fullname: Alexandre Babeanu
     organization: 3Edges
     email: alex@3edges.com
     country: Canada
@@ -135,7 +135,6 @@ OpenID AuthZEN is a Working Group under the OpenID Foundation which aims to incr
 - produce educational material to help raise awareness of externalized authorization.
 
 The aim of this profile is to define an AuthZEN-conformant profile of the OAuth 2.0 Rich Authorization Requests [RFC9396]. [RFC9396] introduces a new parameter `authorization_details` that allows clients to specify their fine-grained authorization requirements using the expressiveness of JSON [RFC8259] data structures.
-
 This specification introduces a more structured format for the `authorization_details` parameter. The new format is also JSON [RFC8259] as a result of which this specification is conformant with [RFC9396] and is merely a stricter profile.
 
 For example the authorization request for a credit transfer mentioned in [RFC9396] would now be structured as follows
@@ -211,6 +210,8 @@ this field contains the entire AuthZEN-conformant authorization request. This fi
 
 This profile declares a new value for the _type_ field as stated in the previous section. The value for this profile is "authzen_evaluation" or "authzen_evaluations". This indicates there will be another field called `request` and its value will be an AuthZEN-conformant authorization request.
 
+The "authzen_evaluation" or "authzen_evaluations" types also indicate that the authorization response should contain a _response_ field containing the authorization response matching the request or requests. The _response_ field will be an AuthZEN-conformant authorization response (see below).
+
 AuthZEN also defines a _type_ field in the Subject and Resource categories. This field is meant to describe the type of user and/or resource required.
 
 ## Common Data Fields
@@ -226,7 +227,6 @@ Conformant to [RFC9396], the `authorization_details` authorization request param
 - backchannel authentication requests as defined in [OID-CIBA]
 
 Parameter encoding follows the exact same rules as [RFC9396].
-
 
 ## Example (non-normative)
 
@@ -359,6 +359,86 @@ This example is based on the one in [RFC9396] under section 3.  Authorization Re
 ]
 ~~~~
 
+# Authorization Responses
+Whereas [RFC9396] doesn't specify any extensions for `authorization_details` responses, [AUTHZEN] standardizes the responses expected from the PDP. An AuthZEN response is therefore expected for all AuthZEN requests. This response can be used by authorization clients directly or by the AS during token creation. In particular, authorization response can be used in conjunction with any user-consent flow.
+
+The new _authorization\_details_ response structure is as follows:
+
+- type:
+The value of this field is expected to be "authzen_evaluation" for a single authorization request, or "authzen_evaluations" for multiple (Boxcarred) evalution requests. This field is **REQUIRED**.
+
+- response:
+This field contains the entire AuthZEN-conformant authorization response. This field is **REQUIRED**.
+
+
+## Single-response Example (non-normative)
+
+~~~~language-json
+[
+  {
+    "type": "authzen_evaluation",
+    "response": {
+        "decision": true
+    }
+  }
+]
+~~~~
+{: title='Source Authorization Response' sourcecode-markers="false"}
+
+
+## Boxcarred-response Example (non-normative)
+Using responses as described in [BOXCAR], a response to the boxcarred example of the multi-authorization requests section above could be:
+
+~~~~language-json
+[
+  {
+    "type": "authzen_evaluations",
+    "response": {
+      "evaluations": {
+        "eval-1": {
+          "decision": true
+        },
+        "eval-2": {
+          "decision": false,
+          "context": {
+            "reason": "resource not found"
+          }
+        },
+        "eval-3": {
+          "decision": false,
+          "context": {
+            "reason": "Subject is a viewer of the resource"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "authzen_evaluations",
+    "response": {
+      "evaluations": {
+        "eval-1": {
+          "decision": true
+        },
+        "eval-2": {
+          "decision": false,
+        },
+        "eval-3": {
+          "decision": false,
+            "context": {
+              "error": {
+                "status": 404,
+                "message": "Resource not found"
+            }
+          }
+        }
+      }
+    }
+  }
+]
+~~~~
+{: title='Source Authorization Response' sourcecode-markers="false"}
+
 # Security Considerations
 
 The Security Considerations of [RFC9396], [RFC6749], [RFC7662], and [RFC8414] all apply.
@@ -379,4 +459,3 @@ This document has no IANA actions.
 
    We would also like to thank Justin Richer and Pieter Kasselman for their
    guidance on this spec and the overall IETF process.
-
