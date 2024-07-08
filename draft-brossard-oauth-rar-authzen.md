@@ -34,7 +34,7 @@ author:
     organization: Aserto
     email: omri@aserto.com
  -
-    fullname: Alex Babeanu
+    fullname: Alexandre Babeanu
     organization: 3Edges
     email: alex@3edges.com
 
@@ -378,4 +378,3 @@ This document has no IANA actions.
 
    We would also like to thank Justin Richer and Pieter Kasselman for their
    guidance on this spec and the overall IETF process.
-
