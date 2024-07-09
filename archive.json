@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-07T01:40:26.166167+00:00",
+  "timestamp": "2024-07-09T01:34:42.552857+00:00",
   "repo": "davidjbrossard/authzen-rar-profile",
   "labels": [
     {
@@ -114,6 +114,48 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOLm7vjM50uC-_",
+      "title": "Feature/responses",
+      "url": "https://github.com/davidjbrossard/authzen-rar-profile/pull/3",
+      "state": "MERGED",
+      "author": "baboulebou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-08T16:37:26Z",
+      "updatedAt": "2024-07-08T21:09:15Z",
+      "baseRepository": "davidjbrossard/authzen-rar-profile",
+      "baseRefName": "main",
+      "baseRefOid": "ed30a6013f07792c9adefcf1bac9b622285c8683",
+      "headRepository": "davidjbrossard/authzen-rar-profile",
+      "headRefName": "feature/responses",
+      "headRefOid": "343fb82737e0bac8ebeb09d275ab26a73b28bc0b",
+      "closedAt": "2024-07-08T21:09:10Z",
+      "mergedAt": "2024-07-08T21:09:10Z",
+      "mergedBy": "davidjbrossard",
+      "mergeCommit": {
+        "oid": "1f2b7d0b88cbcf5815f55eef6c2b6da2cb224495"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLm7vjM6BAlKt",
+          "commit": {
+            "abbreviatedOid": "343fb82"
+          },
+          "author": "ogazitt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-08T21:02:22Z",
+          "updatedAt": "2024-07-08T21:02:22Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
